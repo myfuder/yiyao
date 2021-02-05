@@ -1,0 +1,43 @@
+<!--pages/search/index.wxml-->
+<view>
+  <van-search
+      value="{{ value }}"
+      placeholder="请输入搜索关键词"
+      use-action-slot
+      background="{{color}}"
+      bind:search="onSearch"
+      bind:change="onChange"
+      bind:cancel="onCancel">
+    <!-- <view slot="action" bind:tap="onSearch" style="color:#fff">搜索</view> -->
+    <van-dropdown-menu slot="action">
+      <van-dropdown-item bind:change="onChangeDrow" value="{{ searchvalue }}" options="{{ option }}" />
+    </van-dropdown-menu>
+  </van-search>
+  <view style="padding:0 30rpx">
+    <!-- <view wx:if="{{value!==''}}">
+      <view wx:for="{{searchs}}" catchtap="onSearch" data-value="{{item.title}}" class="search-item">
+        <i style="color:{{color}};font-size:34rpx" class="iconfont icon-sousuo"></i>
+        <text style="margin-left:20rpx">{{item.title}}</text>
+      </view>
+    </view> -->
+    <view>
+      <card title="搜索历史">
+        <view wx:if="{{history.length>0}}" style="display: flex;justify-content: flex-start;flex-wrap: wrap;">
+          <text wx:for="{{history}}" catchtap="onSearch" data-value="{{item.name}}" style="margin:10rpx 6rpx;padding:0 20rpx;border-radius:20rpx;font-size: 30rpx;line-height: 36rpx;height: 40rpx; background:#F4F8FB">{{item.name}}
+          </text>
+        </view>
+        <view wx:else style="text-align: center;font-size: 24rpx;">
+          暂无搜索
+        </view>
+      </card>
+      <card title="热门搜索">
+        <view style="display: flex;justify-content: flex-start;flex-wrap: wrap;">
+          <text wx:for="{{hots}}" catchtap="onSearch" data-value="{{item.name}}" style="margin:10rpx 6rpx;padding:0 20rpx;border-radius:20rpx;font-size: 30rpx;line-height: 36rpx;height: 40rpx; background:#F4F8FB">{{item.name}}
+          </text>
+        </view>
+      </card>
+    </view>
+  </view>
+</view>
+
+

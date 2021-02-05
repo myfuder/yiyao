@@ -1,0 +1,55 @@
+<!--pages/mine/index.wxml-->
+
+<view style="background:#F4F8FB;height:100vh">
+  <view class="flex-col-center align-item-center flex-center" style="padding:40rpx 0;background:{{color}}">
+    <image class="userinfo-avatar" src="https://xgyz.coolgua.com/icon/c2537.png" mode="cover"></image>
+    <text class="userinfo-nickname">你好</text>
+  </view>
+  <view class="user-menu" >
+			<view class="menuB" style="background:#fff">
+				<!-- 观众预登记 -->
+				<view class="user-box clearfix" bindtap="goPage" data-page="my-visitcard">
+					<view class="flex-center">
+						<i class="iconfont icon-gerenxinxi" style="font-size:40rpx;color:#4CC497"></i>
+						<text class="menu-label">个人信息</text>
+					</view>
+					<i class="iconfont icon-youjiantou" style="font-size:40rpx;color:#C3C3C3"></i>
+				</view>
+				<!-- 我的邀约 -->
+				<view class="user-box clearfix" bindtap="goPage" data-page="appoint-new" data-param="1">
+					<view class="flex-center">
+						<i class="iconfont icon-wodefabu" style="font-size:40rpx;color:#FC6A63"></i>
+						<text class="menu-label">我的发布</text>
+					</view>
+          <i class="iconfont icon-youjiantou" style="font-size:40rpx;color:#C3C3C3"></i>
+				</view>
+				<!-- 我的日程 -->
+				<view class="user-box clearfix" bindtap="goPage" data-page="schedule-new" data-param="2">
+					<view class="flex-center">
+						<i class="iconfont icon-fuwujilu" style="font-size:40rpx;color:#7DADF5"></i>
+						<text class="menu-label">我的科研服务</text>
+					</view>
+					<i class="iconfont icon-youjiantou" style="font-size:40rpx;color:#C3C3C3"></i>
+				</view>
+				<!-- 我的需求 -->
+				<view class="user-box clearfix" bindtap="goPage" data-page="my-demand">
+					<view class="flex-center">
+						<i class="iconfont icon-shoucang" style="font-size:40rpx;color:#F78842"></i>
+						<text class="menu-label">收藏的科研</text>
+					</view>
+					<i class="iconfont icon-youjiantou" style="font-size:40rpx;color:#C3C3C3"></i>
+				</view>
+				<view class="user-box clearfix" bindtap="goPage" data-page="applied-actives">
+					<view class="flex-center">
+            <i class="iconfont icon-tongzhi" style="font-size:40rpx;color:#7DADF5"></i>
+						<text class="menu-label">通知</text>
+					</view>
+					<i class="iconfont icon-youjiantou" style="font-size:40rpx;color:#C3C3C3"></i>
+				</view>
+      </view>
+      <button style="background:{{color}};border-radius:40rpx;margin-top:100rpx;color:#fff;font-size:34rpx;">
+        退出登录
+      </button>
+		</view>
+  <tabbar tabBar="{{tabBar||[]}}"></tabbar>
+</view>

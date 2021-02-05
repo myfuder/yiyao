@@ -1,0 +1,8 @@
+/* components/card/index.wxss */
+
+.card-title{
+  font-size: 34rpx;
+  font-weight: bold;
+  margin: 20rpx 0;
+  padding-left: 10rpx;
+}

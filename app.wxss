@@ -1,0 +1,17 @@
+/**app.wxss**/
+@import '/common/common.wxss';
+.container {
+  height: 100%;
+} 
+page{
+  background:#fff
+}
+.van-search{
+  padding: 0rpx 30rpx !important;
+}
+.van-search__action--hover{
+  background:transparent !important;
+}
+.van-search__content{
+  border-radius: 38rpx !important;
+}

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "navbar":"/components/navbar/index",
+    "tabbar":"/components/tabbar/index",
+    "card":"/components/card/index"
+  },
+  "navigationStyle":"custom"
+}

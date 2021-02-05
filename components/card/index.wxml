@@ -1,0 +1,8 @@
+<!--components/card/index.wxml-->
+
+<view>
+  <view wx:if="{{showTitle}}" class="card-title" style=" border-left: 6rpx solid {{color}};">{{title}}</view>
+  <view class="card-body">
+    <slot></slot>
+  </view>
+</view>

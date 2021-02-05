@@ -1,0 +1,160 @@
+@import '/common/common.wxss';
+@import '/common/iconfont.wxss';
+.search-area {
+  padding: 20rpx 0;
+  /* background:#fff */
+}
+.search-area .search-top {
+  display: flex;
+  align-items: center;
+}
+.search-top .input-area {
+  width: 100%;
+  height: 68rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 0 0 25rpx;
+  background: #fff;
+  border-radius: 30rpx;
+}
+.input-area image {
+  width: 35rpx;
+  height: 35rpx;
+  flex-shrink: 0;
+}
+.input-area .input {
+  margin-left: 24rpx;
+  flex: 1;
+  font-size: 26rpx;
+  color: #333;
+  line-height: 33rpx;
+}
+.search-top .search-label {
+  margin-left: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-label text {
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 34rpx;
+}
+.search-label image {
+  width: 27rpx;
+  margin-left: 17rpx;
+}
+.search-con {
+  padding-top: 40rpx;
+}
+.search-con .con-item {
+  margin-top: 20rpx;
+}
+.search-con .con-item:first-child {
+  margin-top: 0;
+}
+.buttons-area {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: 10rpx 0 ;
+}
+.buttons-area .button-box {
+  width:33%;
+  text-align: center;
+}
+.buttons-area .button-box .butImg{
+  display: flex;
+  width: 100rpx;
+  height: 100rpx;
+  margin: 0 auto 14rpx;
+  justify-content: center;
+  align-items: center;
+  /* background: #ff0; */
+}
+.buttons-area .button-box .butImg image{
+  display: block;
+  max-width: 90rpx;
+  max-height: 90rpx;
+  margin: 0 auto;
+}
+.button-box text {
+  font-size:24rpx;
+  color:#333333;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:block;
+  -webkit-line-clamp:1;
+  -webkit-box-orient:vertical;
+}
+.button-box .count {
+  position: absolute;
+  right: -5rpx;
+  top: -5rpx;
+  min-width: 24rpx;
+  height: 24rpx;
+  padding: 0 8rpx;
+  box-sizing: border-box;
+  background-color: #FF0000;
+  text-align: center;
+  border-radius: 50%;
+  font-size:17rpx;
+  color:rgba(255,255,255,1);
+  line-height: 24rpx;
+}
+.friend{
+  display: flex;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+}
+.friend>.person{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+}
+.friend>.person>text{
+  margin: 7rpx 0;
+  font-size: 30rpx;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.friend>.person>image{
+  width: 80rpx;
+  border-radius: 50%;
+  height: 80rpx;
+  display: block;
+  margin:10rpx 10rpx;
+  box-shadow:0px 1px 4px #B7B3B3;
+}
+.friend-item{
+  background:#fff;
+  border-radius:4px;
+  margin-top:16rpx;
+  font-size: 30rpx;
+}
+.friend-item.kid-item{
+  padding-bottom:20rpx;
+}
+.friend-item>.info{
+  display: flex;
+  padding: 35rpx 40rpx;
+  justify-content: space-between;
+  border-bottom:1rpx solid #f1f1f1;
+  margin-bottom:30rpx;
+}
+.friend-item>.info>view{
+  font-size: 34rpx;
+  position: relative;
+  width: 50%;
+}
+
+.friend-item>.info>view>text{
+  margin-left: 26rpx;
+}

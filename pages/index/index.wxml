@@ -1,0 +1,79 @@
+<!--index.wxml-->
+<view class="container" style="margin-bottom:130rpx">
+  <navbar left="32rpx" navColor="{{scrollTop>90?color:''}}"  navTitle="{{navTitle}}" isWhite="false" ></navbar>
+  <image src="{{home_bg}}" style="background:{{color}};border-bottom-left-radius:70rpx;border-bottom-right-radius:70rpx;z-index:-1;width:100%;position:absolute;top:0;height:420rpx;width:100%;"></image>
+  <view style="padding:0 30rpx;padding-top:{{navHeight}}px;">
+    <view class="search-area">
+      <view class="search-top">
+        <navigator url="/pages/search/index" style="border:1px solid {{color}}" class="input-area">
+          <i style="color:{{color}};font-size:34rpx" class="iconfont icon-sousuo"></i>
+          <input class="input" disabled type="text"placeholder="请输入关键词"
+                placeholder-class="input-placeholder"value="{{key}}"></input>
+        </navigator>
+      </view>
+    </view>
+    <swiper class="swiper" autoplay="true" duration="500" style="height: 300rpx;width: 100%;"
+          indicator-dots="{{false}}" circular>
+      <swiper-item wx:for="{{banners}}" wx:key="*this" class="swiper-item" style="">
+        <view
+          style="width: 100%;height:300rpx;background: url({{item.picPath}}) no-repeat center/ 100% 100%;border-radius: 10rpx;"></view>
+      </swiper-item>
+    </swiper>
+    <view>
+      <view class="buttons-area" >
+        <navigator open-type="reLaunch" wx:for="{{menus}}" class="button-box" url="{{item.toPage}}"
+              data-name="{{item.name}}" bindtap="toPage">
+          <view class="butImg">
+            <image class="img-b" src="{{item.image}}" style="" mode='aspectFit'></image>
+          </view>
+          <text>{{item.name}}</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view style="padding:0 30rpx;">
+    <card title="新闻资讯">
+      <navigator  url='' wx:for="{{xw_data}}" class="flex-center" style="background:#F4F8FB;padding:30rpx 0;{{index>0?'border-top:1px solid #EDEDED':''}}">
+        <!-- <image mode="aspectFit" style="width:140rpx;height:140rpx;margin:0 30rpx;" src="{{item.fileUrl}}"></image> -->
+        <view class="flex-col-center space-between " style="text-align:left;height:140rpx;width:calc(100% - 140rpx);">
+          <text class="text-overflow-3" style="font-size:26rpx;line-height:1.5;color:#333333">{{item.articleTitle}}</text>
+          <text style="color:#999999;font-size:24rpx">{{item.createTime}}</text>
+        </view>
+      </navigator>
+    </card>
+    <card title="同兴趣的人">
+      <view class="item friend-item kid-item" style="background:#F4F8FB">
+        <view class="friend" >
+          <view class="person" wx:for="{{frinds}}" wx:key="{{item.index}}">
+            <block wx:if="{{item.photo}}">
+              <image src="{{item.photo}}" style="#ff0" mode='widthFix' class="mlogo"></image>
+            </block>
+            <block wx:else>
+              <image src="{{item.head_imgurl}}" style="#ff0" mode='widthFix' class="mlogo"></image>
+            </block>
+            <text>{{item.name}}</text>
+          </view>   
+        </view>
+      </view>
+    </card>
+    <card title="发现">
+      <navigator  url='' wx:for="{{fx_data}}" class="flex-center" style="background:#F4F8FB;padding:30rpx 0;{{index>0?'border-top:1px solid #EDEDED':''}}">
+        <!-- <image mode="aspectFit" style="width:140rpx;height:140rpx;margin:0 30rpx;" src="{{item.fileUrl}}"></image> -->
+        <view class="flex-col-center space-between " style="text-align:left;height:140rpx;width:calc(100% - 140rpx);">
+          <text class="text-overflow-3" style="font-size:26rpx;line-height:1.5;color:#333333">{{item.articleTitle}}</text>
+          <text style="color:#999999;font-size:24rpx">{{item.createTime}}</text>
+        </view>
+      </navigator>
+    </card>
+    <card title="互动">
+      <navigator  url='' wx:for="{{hd_data}}" class="flex-center" style="background:#F4F8FB;padding:30rpx 0;{{index>0?'border-top:1px solid #EDEDED':''}}">
+        <!-- <image mode="aspectFit" style="width:140rpx;height:140rpx;margin:0 30rpx;" src="{{item.fileUrl}}"></image> -->
+        <view class="flex-col-center space-between " style="text-align:left;height:140rpx;width:calc(100% - 140rpx);">
+          <text class="text-overflow-3" style="font-size:26rpx;line-height:1.5;color:#333333">{{item.articleTitle}}</text>
+          <text style="color:#999999;font-size:24rpx">{{item.createTime}}</text>
+        </view>
+      </navigator>
+    </card>
+  </view>
+  <tabbar tabBar="{{tabBar||[]}}"></tabbar>
+</view>

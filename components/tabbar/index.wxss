@@ -1,0 +1,16 @@
+/* components/navbar/tabbar/index.wxss */
+@import '/common/common.wxss';
+@import '/common/iconfont.wxss';
+.tabbar{
+  width:100%;
+  background:#ffffff;
+  position: fixed;
+  bottom:0;
+  left:0;
+  border-top:1px solid #DDDFE1;
+}
+.tabbar-nav{
+  padding:10rpx 0;
+  font-size:26rpx;
+  color:#9E9E9E
+}

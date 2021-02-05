@@ -1,0 +1,24 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/authorize/index",
+    "pages/search/index",
+    "pages/discovery/index",
+    "pages/service/index",
+    "pages/mine/index",
+    "pages/interaction/index",
+    "pages/allOfSearch/index",
+    "pages/service/kgfw/index",
+    "pages/service/yjjs/index",
+    "pages/service/ggpt/index",
+    "pages/service/yjptsb/index"
+  ],
+  "usingComponents": {
+    "van-row": "@vant/weapp/row",
+    "van-col": "@vant/weapp/col",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-search": "@vant/weapp/search/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

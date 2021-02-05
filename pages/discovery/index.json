@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "发现",
+  "usingComponents": {
+    "tabbar":"/components/tabbar/index",
+    "van-search": "@vant/weapp/search/index"
+  }
+}

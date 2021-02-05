@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "互动",
+  "usingComponents": {
+    "tabbar":"/components/tabbar/index",
+    "tagswatch":"/components/tagSwatch/tagSwatch"
+  }
+}

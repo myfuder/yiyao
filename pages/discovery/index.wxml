@@ -1,0 +1,62 @@
+<!--pages/discovery/index.wxml-->
+
+<view>
+  <view style="padding:30rpx 0;background:{{color}}">
+    <van-search
+      value="{{ value }}"
+      placeholder="请输入搜索关键词"
+      use-action-slot
+      background="{{color}}"
+      bind:search="onSearch"
+      bind:change="onChange"
+      bind:cancel="onCancel">
+      <view slot="action">
+        <i bind:tap="onClickPailie" class="iconfont {{direction == 0?'icon-liebiaopailie':'icon-fenleipailie'}}" style="font-size:50rpx;color:#fff"></i>
+        <i wx:if="{{currOption.screen}}" bind:tap="onClickPopup" class="iconfont icon-shaixuan" style="font-size:50rpx;color:#fff;margin-left:20rpx"></i>
+      </view>
+      </van-search>
+  </view>
+  <van-popup show="{{ showPopup }}"  position="right"
+  custom-style="width: 70%;height:100%;padding:20rpx" bind:close="onClosePopup">
+    <view wx:for="{{currOption.screen}}" style="">
+      <view class="align-item-center">
+        <i class="iconfont {{item.active?'icon-duoxuan':'icon-duoxuan1'}}" data-item="{{item}}" bindtap="onChangeScreen" style="font-size:30rpx;color:{{color}}"></i>
+        <text style="font-size:32rpx;font-weight:bold;margin-left:10rpx;line-height:2"  data-item="{{item}}" bindtap="onChangeScreen">{{item.value}}</text>
+      </view>
+      <view style="display: flex;justify-content: flex-start;flex-wrap: wrap;">
+        <text wx:for="{{item.data}}" wx:for-item="itemc" data-item="{{item}}" data-itemc="{{itemc}}" bindtap="onChangeScreenItem" style="margin:20rpx 6rpx;padding:0 20rpx;border-radius:20rpx;font-size: 28rpx;line-height: 40rpx;height: 40rpx; {{itemc.active?'color:#fff;background:'+color:'background:#F4F8FB'}} ">{{itemc.value}}
+        </text>
+      </view>
+    </view>
+  </van-popup>
+  <view class="flex-center" style="height:calc(100vh - 128rpx - 108rpx);overflow:auto">
+    <view class="fx-left">
+      <text wx:for="{{typeOptions}}" catchtap="onChangeType" data-item="{{item}}" class="{{typeActive==item.id?'type-active':''}}" style="{{typeActive==item.id?'color:'+color:''}}">{{item.value}}</text>
+    </view>
+    <view class="fx-right">
+      <navigator wx:if="{{direction==0}}" url='' wx:for="{{20}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
+          <view class="flex-col-center space-between " style="text-align:left;width:100%;height:180rpx;">
+            <view>
+              <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333">dasdadasdadasdadasdadasdadasda</text>
+              <text class="text-overflow-two" style="color:#999999;font-size:26rpx;margin-top:20rpx;">dadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdasda</text>
+            </view>
+            <text style="color:#999999;font-size:24rpx">dasda</text>
+          </view>
+        </navigator>
+        <van-row wx:if="{{direction==1}}" gutter="10">
+          <van-col wx:for="{{20}}" span="12">
+            <navigator url='' class="flex-center" style="background:#F4F8FB;margin-bottom:20rpx;padding:10rpx 20rpx;">
+              <view class="flex-col-center space-between " style="text-align:left;width:100%;height:290rpx;">
+                <view>
+                  <text class="text-overflow-two" style="-webkit-line-clamp: 1;font-size:30rpx;line-height:1.5;color:#333333">dasdadasdadasdadasdadasdadasda</text>
+                  <text class="text-overflow-two" style="-webkit-line-clamp: 5;color:#999999;font-size:26rpx;margin-top:20rpx;">dadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdasda</text>
+                </view>
+                <text style="color:#999999;font-size:24rpx">dasda</text>
+              </view>
+            </navigator>
+          </van-col>
+        </van-row>
+    </view>
+  </view>
+  <tabbar tabBar="{{tabBar||[]}}"></tabbar>
+</view>

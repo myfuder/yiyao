@@ -1,0 +1,31 @@
+/* components/tagSwatch/tagSwatch.wxss */
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
+.costom{
+  padding:0 134rpx
+}
+.active{
+  position: relative;
+}
+.van-ellipsis{
+  font-weight:bold !important;
+  margin-top:10px !important;
+  margin-bottom:0 !important;
+  font-size:17px !important;
+  display:inline-block !important;
+  /* margin-bottom:10px !important; */
+  padding-bottom:10px !important;
+}
+.active:after{
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 20rpx;
+  right: -15px;
+  border-left: 12rpx solid transparent;
+  border-right: 12rpx solid transparent;
+  border-top:20rpx solid #000000;
+}
