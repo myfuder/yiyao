@@ -6,29 +6,11 @@
   </view>
   <view style="margin-top:40rpx">
     <van-row gutter="10">
-      <van-col span="12">
-        <view class="flex-col-center align-item-center" style="background:#F4F8FB;border-radius:20rpx;margin-bottom:20rpx;padding:40rpx 0">
-          <van-icon name="youzan-shield" color="#996699" size="100rpx"/>
-          <text style="font-size:28rpx;margin-top:20rpx">科管服务</text>
-        </view>
-      </van-col>
-      <van-col span="12">
-        <view class="flex-col-center align-item-center" style="background:#F4F8FB;border-radius:20rpx;margin-bottom:20rpx;padding:40rpx 0;">
-          <van-icon name="diamond" color="#9999CC" size="100rpx"/>
-          <text style="font-size:28rpx;margin-top:20rpx">研究所/室介绍</text>
-        </view>
-      </van-col>
-      <van-col span="12">
-        <view class="flex-col-center align-item-center" style="background:#F4F8FB;border-radius:20rpx;margin-bottom:20rpx;padding:40rpx 0;">
-          <van-icon name="todo-list" color="#99CC99" size="100rpx"/>
-          <text style="font-size:28rpx;margin-top:20rpx">公共平台</text>
-        </view>
-      </van-col>
-      <van-col span="12">
-        <view class="flex-col-center align-item-center" style="background:#F4F8FB;border-radius:20rpx;margin-bottom:20rpx;padding:40rpx 0;">
-          <van-icon name="map-marked" color="#FFCC99" size="100rpx"/>
-          <text style="font-size:28rpx;margin-top:20rpx">研究平台/设备</text>
-        </view>
+      <van-col wx:for="{{menus}}" span="12">
+        <navigator url="{{item.path}}" class="flex-col-center align-item-center" style="background:#F4F8FB;border-radius:20rpx;margin-bottom:20rpx;padding:40rpx 0">
+          <van-icon name="{{item.icon}}" color="{{item.color}}" size="100rpx"/>
+          <text style="font-size:28rpx;margin-top:20rpx">{{item.name}}</text>
+        </navigator>
       </van-col>
     </van-row>
   </view>

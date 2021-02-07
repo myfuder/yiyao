@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "研究平台/设备",
+  "usingComponents": {
+    "tabbar":"/components/tabbar/index",
+    "tagswatch":"/components/tagSwatch/tagSwatch",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index"
+  }
 }

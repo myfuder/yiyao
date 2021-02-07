@@ -15,9 +15,12 @@
   flex-direction: column;
 }
 .text-overflow-one {
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  display: -webkit-box ;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:1; 
 }
 .text-overflow-two{
   display: -webkit-box ;
@@ -28,9 +31,18 @@
   -webkit-line-clamp:2; 
 }
 .text-overflow-3{
-  display: -webkit-box;    
-  -webkit-box-orient: vertical;   
-  text-overflow: ellipsis;     
-  -webkit-line-clamp: 3;    
+  display: -webkit-box ;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:3; 
+}
+.text-overflow-4{
+  display: -webkit-box ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:4; 
 }

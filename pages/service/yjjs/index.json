@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "研究所/室介绍",
+  "usingComponents": {
+    "tabbar":"/components/tabbar/index",
+    "van-search": "@vant/weapp/search/index"
+  }
 }

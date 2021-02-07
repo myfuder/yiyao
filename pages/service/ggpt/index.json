@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "公共平台",
+  "usingComponents": {
+    "tabbar":"/components/tabbar/index",
+    "van-search": "@vant/weapp/search/index"
+  }
 }

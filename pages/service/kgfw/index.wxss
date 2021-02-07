@@ -1,1 +1,8 @@
 /* pages/service/kgfw/index.wxss */
+@import '/common/common.wxss';
+.custom-class{
+  margin-top:20rpx;
+}
+.van-card__thumb{
+  width:250rpx !important
+}

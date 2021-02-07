@@ -6,7 +6,7 @@
     bindtap="handleclick" data-value="{{item.value}}"
     style="{{normalstyle}};font-size:34rpx;display:inline-block;padding:0 8px 20rpx;line-height: 18px;{{value==item.value?activestyle:''}}">{{item.label}}</text>
     <van-dropdown-menu wx:else active-color="{{color}}">
-      <van-dropdown-item title="{{ item.label }}" bind:change="onChange" options="{{ item.childOptions }}" />
+      <van-dropdown-item title-class="customTagclass" title="{{ item.label }}" bind:change="onChange" options="{{ item.childOptions }}" />
     </van-dropdown-menu>
   </view>
   

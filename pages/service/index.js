@@ -6,6 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    menus:[
+      {icon:'youzan-shield',name:'科管服务',path:'/pages/service/kgfw/index',color:'#996699'},
+      {icon:'diamond',name:'研究所/室介绍',path:'/pages/service/yjjs/index',color:'#9999CC'},
+      {icon:'todo-list',name:'公共平台',path:'/pages/service/ggpt/index',color:'#99CC99'},
+      {icon:'map-marked',name:'研究平台/设备',path:'/pages/service/yjptsb/index',color:'#FFCC99'}
+    ]
   },
   /**
    * 生命周期函数--监听页面加载
