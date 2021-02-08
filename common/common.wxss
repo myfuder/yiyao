@@ -2,6 +2,9 @@
   display: flex;
   justify-content: center;
 }
+.flex{
+  display: flex;
+}
 .align-item-center{
   display: flex;
   align-items: center;

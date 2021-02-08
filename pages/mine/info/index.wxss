@@ -1,0 +1,11 @@
+/* pages/mine/info/index.wxss */
+@import '/common/common.wxss';
+@import '/common/iconfont.wxss';
+.van-radio__label{
+  margin-left:6rpx !important
+}
+.form_item{
+  height:90rpx;
+}
+.van-cell{
+}

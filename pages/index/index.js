@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    navTitle:'test',
+    navTitle:'华西临床基础交叉合作',
     tabBar:[],
     scrollTop:0,
     banners:[

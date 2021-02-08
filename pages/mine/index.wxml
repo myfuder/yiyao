@@ -8,13 +8,13 @@
   <view class="user-menu" >
 			<view class="menuB" style="background:#fff">
 				<!-- 观众预登记 -->
-				<view class="user-box clearfix" bindtap="goPage" data-page="my-visitcard">
+				<navigator url="/pages/mine/info/index" class="user-box clearfix" bindtap="goPage" data-page="my-visitcard">
 					<view class="flex-center">
 						<i class="iconfont icon-gerenxinxi" style="font-size:40rpx;color:#4CC497"></i>
 						<text class="menu-label">个人信息</text>
 					</view>
 					<i class="iconfont icon-youjiantou" style="font-size:40rpx;color:#C3C3C3"></i>
-				</view>
+				</navigator>
 				<!-- 我的邀约 -->
 				<view class="user-box clearfix" bindtap="goPage" data-page="appoint-new" data-param="1">
 					<view class="flex-center">

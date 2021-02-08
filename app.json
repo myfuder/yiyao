@@ -12,7 +12,8 @@
     "pages/service/kgfw/index",
     "pages/service/yjjs/index",
     "pages/service/ggpt/index",
-    "pages/service/yjptsb/index"
+    "pages/service/yjptsb/index",
+    "pages/mine/info/index"
   ],
   "usingComponents": {
     "van-row": "@vant/weapp/row",
