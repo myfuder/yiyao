@@ -5,15 +5,19 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    color:{
+      type:String,
+      value:wx.getStorageSync('color')
+    },
     tabBar:{
       type:Array,
       value:[]
     }
   },
   attached() {
-    this.setData({
-      color: wx.getStorageSync('color'),
-    })
+    // this.setData({
+    //   color: wx.getStorageSync('color'),
+    // })
   },
   observers:{
     "tabBar":function(avg){

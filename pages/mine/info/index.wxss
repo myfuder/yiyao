@@ -7,5 +7,6 @@
 .form_item{
   height:90rpx;
 }
-.van-cell{
+.van-cell::after{
+  /* border-bottom:1px solid #f00 !important; */
 }

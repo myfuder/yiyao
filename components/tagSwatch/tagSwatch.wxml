@@ -1,13 +1,14 @@
 
 
-<view style="display:flex" class="{{between?'space-between costom':''}}">
-  <view wx:for="{{optionsC}}"  style="{{value==item.value?'border-bottom:2px solid '+color:''}}">
-    <text wx:if="{{!item.childOptions||value!=item.value}}"
-    bindtap="handleclick" data-value="{{item.value}}"
-    style="{{normalstyle}};font-size:34rpx;display:inline-block;padding:0 8px 20rpx;line-height: 18px;{{value==item.value?activestyle:''}}">{{item.label}}</text>
-    <van-dropdown-menu wx:else active-color="{{color}}">
-      <van-dropdown-item title-class="customTagclass" title="{{ item.label }}" bind:change="onChange" options="{{ item.childOptions }}" />
-    </van-dropdown-menu>
+<view style="display:flex" class="{{between?'space-between':''}}">
+  <view wx:for="{{optionsC}}" class="flex-center" style="width:{{100/optionsC.length}}%;">
+    <view style="width:fit-content;{{value==item.value?activestyle:''}}">
+      <text wx:if="{{!item.childOptions||value!=item.value}}"
+      bindtap="handleclick" data-value="{{item.value}}"
+      style="{{normalstyle}};white-space: nowrap;font-size:34rpx;display:inline-block;padding:0 8px 20rpx;line-height: 18px;{{value==item.value?activestyle:''}}">{{item.label}}</text>
+      <van-dropdown-menu wx:else active-color="{{color}}">
+        <van-dropdown-item title-class="customTagclass" title="{{ item.label }}" bind:change="onChange" options="{{ item.childOptions }}" />
+      </van-dropdown-menu>
+    </view>
   </view>
-  
 </view>

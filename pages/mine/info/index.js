@@ -1,6 +1,7 @@
 // pages/mine/info/index.js
+import {ajax,debounce} from '../../../utils/util'
+let _self;
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -12,6 +13,9 @@ Page({
     maxDate: new Date().getTime(),
     currentDate: new Date().getTime(),
     minDate: new Date(1970, 1, 1).getTime(),
+    headImage:'https://img.yzcdn.cn/vant/cat.jpeg',
+    tags:[],
+    tagValue:''
   },
   onChange(event) {
     this.setData({
@@ -46,11 +50,47 @@ Page({
     //   [`show.${event.target.id}`]: false,
     // });
   },
+  afterRead(event) {
+    console.log(event)
+    const { file } = event.detail;
+    this.setData({
+      headImage: file.url
+    })
+    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+    wx.uploadFile({
+      url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
+      filePath: file.url,
+      name: 'file',
+      formData: { user: 'test' },
+      success(res) {
+        // 上传完成需要更新 fileList
+        // const { fileList = [] } = this.data;
+        // fileList.push({ ...file, url: res.data });
+        // this.setData({ fileList });
+      },
+    });
+  },
+  onBlurTags(e){
+    let value = e.detail.value
+    _self.setData({
+      tagValue:'',
+      tags:[value].concat(_self.data.tags)
+    })
+  },
+  getUserInfo(){
+    ajax.get(`/api/user/profile`).then((item)=>{
+      debugger
+    })
+  },
+  das(e){
+    debugger
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    _self = this
+    this.getUserInfo()
   },
 
   /**
@@ -71,9 +111,6 @@ Page({
       backgroundColor: wx.getStorageSync('color'),
       frontColor: '#ffffff',
     })
-
-
-
   },
 
   /**

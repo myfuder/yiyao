@@ -2,11 +2,14 @@
 
 <view>
   <!-- thumb-mode="scaleToFill" -->
-  <van-card wx:for="{{6}}"
+  <van-card wx:for="{{kg_data}}"
+  style="--card-title-line-height:2"
   custom-class="custom-class"
-    title-class="text-overflow-one"
-    desc-class="text-overflow-4"
-    desc="描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息"
-    title="标题标题标题标题标题标题标题标题标题标题标题"
-    thumb="http://hxbtb.wchscu.cn/storage/thumbnails/_signature/15LKGC9Q6RJ2NSRUKQV3TBESJI.jpg"/>
+    title-class="text-overflow-one custom-title"
+    desc-class="text-overflow-3"
+    desc="{{item.desc}}"
+    data-path="{{item.detailsurl}}"
+    title="{{item.title}}"
+    bindtap="pageToDetail"
+    thumb="{{basUrl+item.imageUrl}}"/>
 </view>

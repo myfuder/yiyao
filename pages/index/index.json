@@ -2,7 +2,8 @@
   "usingComponents": {
     "navbar":"/components/navbar/index",
     "tabbar":"/components/tabbar/index",
-    "card":"/components/card/index"
+    "card":"/components/card/index",
+    "van-tag": "@vant/weapp/tag/index"
   },
   "navigationStyle":"custom"
 }

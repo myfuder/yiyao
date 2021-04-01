@@ -13,7 +13,7 @@ Component({
     },
     activestyle:{
       type:"String",
-      value:''
+      value:'border-bottom:2px solid '+wx.getStorageSync('color')
     },
     between:{
       type:'Boolean',
@@ -29,7 +29,13 @@ Component({
     },
     options:{
       type:Array,
-      value:[]
+      value:[],
+      observer:function(newVal,oldVal,change){
+        debugger
+        this.setData({
+          optionsC:newVal,
+        })
+      }
     }
   },
 

@@ -1,5 +1,6 @@
 /**app.wxss**/
 @import '/common/common.wxss';
+@import '/common/iconfont.wxss';
 .container {
   height: 100%;
 } 

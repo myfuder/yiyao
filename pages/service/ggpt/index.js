@@ -1,11 +1,15 @@
 // pages/service/ggpt/index.js
 const app = getApp()
+import {
+  ajax,basUrl
+} from '../../../utils/util';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    basUrl,
     typeActive:'',
     direction:0,  //0列表 1方格
     showPopup:false,
@@ -18,6 +22,8 @@ Page({
       {id:'4',value:'第四科研大楼'},
       {id:'5',value:'华西医院本部'},
       {id:'6',value:'前沿医学中心'}
+    ],
+    pt_data:[
     ]
   },
   onChangeType(e){
@@ -26,65 +32,43 @@ Page({
       typeActive:item.id,
       currOption:item
     })
+    this.getList()
   },
   onClickPailie(e){
     this.setData({
       direction:this.data.direction==0?1:0
     })
   },
-  onClickPopup(){
-    this.setData({ showPopup: true });
-  },
-  onClosePopup() {
-    this.setData({ showPopup: false });
-  },
-  onChangeScreen(e){
-    let avg = e.currentTarget.dataset.item
-    let newOption = this.data.currOption.screen.map((item)=>{
-      if(avg.id == item.id){
-        item.active = !item.active 
-        if(item.data){
-          item.data.map((itemc)=>{
-            itemc.active = item.active
-          })
-        }
-      }
-      return {...item}
-    })
-    
-    this.setData({
-      currOption:{...this.data.currOption.currOption,screen:newOption}
+  getOptionList(){
+    ajax.get('/api/kjfw/filter').then((res)=>{
+      this.setData({
+        typeOptions:[{id:'',value:'全部'}].concat(res.data.address.map((item)=>{
+          return {id:item.id,value:item.name}
+        })),
+      })
     })
   },
-  onChangeScreenItem(e){
-    let avg = e.currentTarget.dataset.item
-    let avgc = e.currentTarget.dataset.itemc
-    
-    let newOption = this.data.currOption.screen.map((item)=>{
-      if(avg.id == item.id){
-        let flag = true
-        item.data.map((itemc)=>{
-          if(avgc.id == itemc.id){
-            itemc.active = !itemc.active
-          }
-          if(!itemc.active){
-            flag = false
-          }
+  getList(){
+    ajax.get(`/api/kjfw/platform?parkId=${this.data.typeActive}`).then((res)=>{
+      console.log(res)
+      this.setData({
+        pt_data:res.data.content.map((item)=>{
+          return {...item,researchDirection:item.researchDirection.replace(/<[^>]*>|/g,"")}
         })
-        item.active = flag
-      }
-      return {...item}
+      })
     })
-
-    this.setData({
-      currOption:{...this.data.currOption.currOption,screen:newOption}
+  },
+  onFocus(){
+    wx.navigateTo({
+      url: '/pages/allOfSearch/index',
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getOptionList()
+    this.getList()
   },
 
   /**
@@ -100,11 +84,11 @@ Page({
   onShow(){
     app.setTabBar();
     wx.setNavigationBarColor({
-      backgroundColor: wx.getStorageSync('color'),
+      backgroundColor: '#D3D3D3'||wx.getStorageSync('color'),
       frontColor: '#ffffff',
     })
     this.setData({
-      color:wx.getStorageSync('color'),
+      color:'#D3D3D3'||wx.getStorageSync('color'),
       path:"/"+getCurrentPages()[0].route
     })
   },

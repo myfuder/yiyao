@@ -1,7 +1,9 @@
 {
   "navigationBarTitleText": "发现",
   "usingComponents": {
+    "navbar":"/components/navbar/index",
     "tabbar":"/components/tabbar/index",
     "van-search": "@vant/weapp/search/index"
-  }
+  },
+  "navigationStyle":"custom"
 }

@@ -7,9 +7,7 @@
       placeholder="请输入搜索关键词"
       use-action-slot
       background="{{color}}"
-      bind:search="onSearch"
-      bind:change="onChange"
-      bind:cancel="onCancel">
+      bind:focus="onFocus">
       <view slot="action">
         <i bind:tap="onClickPailie" class="iconfont {{direction == 0?'icon-liebiaopailie':'icon-fenleipailie'}}" style="font-size:50rpx;color:#fff"></i>
         <i wx:if="{{currOption.screen}}" bind:tap="onClickPopup" class="iconfont icon-shaixuan" style="font-size:50rpx;color:#fff;margin-left:20rpx"></i>
@@ -29,32 +27,38 @@
       </view>
     </view>
   </van-popup>
-  <view class="flex-center" style="height:calc(100vh - 128rpx - 108rpx);overflow:auto">
+  <view class="flex-center" style="height:calc(100vh - 136rpx);overflow:auto">
     <view class="fx-left">
       <text wx:for="{{typeOptions}}" catchtap="onChangeType" data-item="{{item}}" class="{{typeActive==item.id?'type-active':''}}" style="{{typeActive==item.id?'color:'+color:''}}">{{item.value}}</text>
     </view>
     <view class="fx-right">
-      <navigator wx:if="{{direction==0}}" url='' wx:for="{{20}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
+      <navigator wx:if="{{direction==0}}" url='/pages/details/detail1/index?id={{item.myid}}&type=科技服务' wx:for="{{pt_data}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
         <van-image width="180rpx" height="150rpx;" fit="scale-down" src="https://img.yzcdn.cn/vant/cat.jpeg">
           <!-- <text slot="error">加载失败</text> -->
         </van-image>
-        <view class="flex-col-center space-between " style="text-align:left;width:calc(100% - 180rpx);height:150rpx;margin-left:20rpx">
-          <view>
-            <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333">dasdadasdadasdadasdadasdadasda</text>
-            <text class="text-overflow-3" style="color:#999999;font-size:26rpx;;">dadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdasda</text>
+        <view class="flex-col-center space-between " style="text-align:left;width:calc(100% - 180rpx);margin-left:20rpx">
+          <view style="line-height:1.5">
+            <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333">{{item.name}}</text>
+            <text class="text-overflow-one" style="color:#999999;font-size:26rpx;;">平台主管:{{item.managerName}}</text>
+            <!-- <text class="text-overflow-one" style="color:#999999;font-size:26rpx;;">副主管:{{item.de_director}}</text> -->
+            <text class="text-overflow-one" style="color:#999999;font-size:26rpx;;">办公电话:{{item.phone}}</text>
+            <text class="text-overflow-3" style="color:#999999;font-size:26rpx;;">服务内容:{{item.researchDirection}}</text>
           </view>
           <!-- <text style="color:#999999;font-size:24rpx">dasda</text> -->
         </view>
       </navigator>
       <van-row wx:if="{{direction==1}}" gutter="10">
-        <van-col wx:for="{{20}}" span="12">
-          <navigator url='' class="flex-center" style="background:#F4F8FB;margin-bottom:20rpx;padding:10rpx 20rpx;">
-            <view class="flex-col-center space-between " style="text-align:left;width:100%;height:290rpx;">
-              <view>
-                <text class="text-overflow-two" style="-webkit-line-clamp: 1;font-size:30rpx;line-height:1.5;color:#333333">dasdadasdadasdadasdadasdadasda</text>
-                <text class="text-overflow-two" style="-webkit-line-clamp: 5;color:#999999;font-size:26rpx;margin-top:20rpx;">dadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdasda</text>
-              </view>
-              <text style="color:#999999;font-size:24rpx">dasda</text>
+        <van-col wx:for="{{pt_data}}" span="12">
+          <navigator url='/pages/details/detail1/index?id={{item.myid}}&type=科技服务' class="flex-col-center" style="background:#F4F8FB;margin-bottom:20rpx;padding:10rpx 20rpx;">
+            <van-image width="100%" height="calc(50vw*0.7)" fit="scale-down" src="{{basUrl+item.url}}">
+              <!-- <text slot="error">加载失败</text> -->
+            </van-image>
+            <view class="flex-col-center " style="height:300rpx;text-align:left;width:100%;line-height:1.5">
+              <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333">{{item.name}}</text>
+              <text class="text-overflow-one" style="color:#999999;font-size:24rpx;;">平台主管：{{item.managerName}}</text>
+              <!-- <text class="text-overflow-one" style="color:#999999;font-size:26rpx;;">副主管:{{item.de_director}}</text> -->
+              <text class="text-overflow-two" style="color:#999999;font-size:24rpx;;">办公电话：{{item.phone}}</text>
+              <text class="text-overflow-3" style="-webkit-line-clamp:4;color:#999999;font-size:24rpx;;">服务内容：{{item.researchDirection}}</text>
             </view>
           </navigator>
         </van-col>

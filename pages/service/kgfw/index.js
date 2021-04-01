@@ -1,18 +1,37 @@
 // pages/service/kgfw/index.js
+import {
+  ajax,basUrl
+} from '../../../utils/util';
+let _self;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    basUrl,
+    kg_data:[
+    ]
   },
-
+  getList(){
+    ajax.get('/api/kjfw/guides').then((res)=>{
+      console.log(res)
+      this.setData({
+        kg_data:res
+      })
+    })
+  },
+  pageToDetail(e){
+    wx.navigateTo({
+      url: '/pages/service/kgfw/detail/index?path='+e.currentTarget.dataset.path,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
+    this.getList()
   },
 
   /**
@@ -27,7 +46,7 @@ Page({
    */
   onShow: function () {
     wx.setNavigationBarColor({
-      backgroundColor: wx.getStorageSync('color'),
+      backgroundColor: '#D3D3D3'||wx.getStorageSync('color'),
       frontColor: '#ffffff',
     })
   },

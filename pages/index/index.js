@@ -1,6 +1,8 @@
-// index.js
 // 获取应用实例
 const app = getApp()
+import {
+  ajax
+} from '../../utils/util';
 
 Page({
   data: {
@@ -13,12 +15,12 @@ Page({
     ],
     menus: [{
       name: "发现",
-      image: 'https://xgyz.coolgua.com/icon/c2537.png',
+      image: 'https://xgyz.coolgua.com/icon/c2543.png',
       toPage: '/pages/discovery/index'
     },
     {
       name: "服务",
-      image: 'https://xgyz.coolgua.com/icon/c2537.png',
+      image: 'https://xgyz.coolgua.com/icon/c2538.png',
       toPage:'/pages/service/index'
     },
     {
@@ -48,62 +50,36 @@ Page({
         name:'ttt'
       }
     ],
-    xw_data:[
-      {
-        fileUrl:'https://xgyz.coolgua.com/icon/c2537.png',
-        articleTitle:'测试文章',
-        createTime:'2021-01-13'
-      },
-      {
-        fileUrl:'https://xgyz.coolgua.com/icon/c2537.png',
-        articleTitle:'测试文章2',
-        createTime:'2021-01-13'
-      },
-      {
-        fileUrl:'https://xgyz.coolgua.com/icon/c2537.png',
-        articleTitle:'测试文章3',
-        createTime:'2021-01-13'
-      }
-    ],
     fx_data:[
-      {
-        fileUrl:'https://xgyz.coolgua.com/icon/c2537.png',
-        articleTitle:'测试文章',
-        createTime:'2021-01-13'
-      },
-      {
-        fileUrl:'https://xgyz.coolgua.com/icon/c2537.png',
-        articleTitle:'测试文章2',
-        createTime:'2021-01-13'
-      },
-      {
-        fileUrl:'https://xgyz.coolgua.com/icon/c2537.png',
-        articleTitle:'测试文章3',
-        createTime:'2021-01-13'
-      }
     ],
     hd_data:[
-      {
-        fileUrl:'https://xgyz.coolgua.com/icon/c2537.png',
-        articleTitle:'测试文章',
-        createTime:'2021-01-13'
-      },
-      {
-        fileUrl:'https://xgyz.coolgua.com/icon/c2537.png',
-        articleTitle:'测试文章2',
-        createTime:'2021-01-13'
-      },
-      {
-        fileUrl:'https://xgyz.coolgua.com/icon/c2537.png',
-        articleTitle:'测试文章3',
-        createTime:'2021-01-13'
-      }
     ]
+  },
+  getFxList(){
+    ajax.get(`/api/find/search?pageNo=1&pageSize=3&range=发现`).then((res)=>{
+      this.setData({
+        fx_data:res.data.resultVo.content.map((item)=>{
+          return  {...item,content:item.content.replace(/[^\u4e00-\u9fa5]/gi,""),}
+        }),
+      })
+    })
+  },
+  getHdList(){
+    ajax.get(`/api/find/search?pageNo=1&pageSize=3&range=互动`).then((res)=>{
+      console.log(res)
+      this.setData({
+        hd_data:res.data.resultVo.content.map((item)=>{
+          return  {...item,content:item.content.replace(/[^\u4e00-\u9fa5]/gi,""),}
+        }),
+      })
+    })
   },
   onShow(){
     app.setTabBar()
   },
   onLoad() {
+    this.getFxList()
+    this.getHdList()
     this.setData({
       navHeight: app.globalData.navHeight,
       navTitleTop: app.globalData.navTitleTop
@@ -112,13 +88,6 @@ Page({
     this.setData({
       color:wx.getStorageSync('color')
     })
-    // wx.setNavigationBarColor({
-    //   backgroundColor: wx.getStorageSync('color'),
-    //   frontColor: '#ffffff',
-    // })
-    // wx.setNavigationBarTitle({
-    //   title: '首页',
-    // })
   },
   onReady(){
     // let isLogin = 

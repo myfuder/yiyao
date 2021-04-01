@@ -1,0 +1,27 @@
+<!--pages/mine/demind/index.wxml-->
+
+<view>
+  <van-tabs style="--tabs-bottom-bar-color:{{color}}" ellipsis="{{false}}" bind:click="onClick">
+    <van-tab  wx:for="{{tabs}}" name="{{item.id}}" title="{{item.title}}"></van-tab>
+  </van-tabs>
+  <view class="" style="height:calc(100vh - 128rpx);overflow:auto;margin:20rpx">
+    <van-swipe-cell  wx:for="{{20}}" id="myswipes{{index}}" right-width="{{ 120 }}"async-close >
+      <navigator url=''class="flex-center" style="position:relative;background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
+        <van-tag wx:if="{{!activeId}}" style="position:absolute;right:0;top:-8rpx" color="{{color}}" type="primary">需求</van-tag>
+        <view class="flex-col-center space-between " style="text-align:left;width:100%;height:180rpx;">
+          <view>
+            <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333">dasdadasdadasdadasdadasdadasda</text>
+            <text class="text-overflow-two" style="color:#999999;font-size:26rpx;margin-top:20rpx;">dadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdasda</text>
+          </view>
+          <text style="color:#999999;font-size:24rpx">dasda</text>
+        </view>
+      </navigator>
+      <view slot="right">
+        <view class="flex">
+          <van-button bind:click="edit" square style="--button-default-height:222rpx" type="primary">编辑</van-button>
+          <van-button bind:click="delete" data-name="#myswipes{{index}}" square style="--button-default-height:222rpx" type="danger">删除</van-button>
+        </view>
+      </view>
+    </van-swipe-cell>
+  </view>
+</view>

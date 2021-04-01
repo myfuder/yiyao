@@ -1,0 +1,9 @@
+<!--pages/mine/kysc/index.wxml-->
+
+<view>
+  <van-cell-group>
+    <van-cell wx:for="{{20}}" title="单元格" >
+      <button bindtap="delete" data-id='{{item}}' size="mini" plain style="color:red;font-size: 28rpx;border: none;background: transparent;outline: none;">取消收藏</button>
+    </van-cell>
+  </van-cell-group>
+</view>

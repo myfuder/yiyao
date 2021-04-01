@@ -14,3 +14,14 @@
   font-size:26rpx;
   color:#9E9E9E
 }
+.formal{
+  font-size:50rpx;
+}
+.tuchu{
+  /* font-size: 36px !important; */
+  margin-top: -40rpx;
+  color:#fff;
+  background:#996699;
+  padding:20rpx;
+  border-radius: 50%;
+}

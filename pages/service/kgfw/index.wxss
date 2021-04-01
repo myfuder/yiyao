@@ -3,6 +3,10 @@
 .custom-class{
   margin-top:20rpx;
 }
+.custom-title{
+  font-size:30rpx;
+  line-height: 2;
+}
 .van-card__thumb{
   width:250rpx !important
 }

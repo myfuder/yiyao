@@ -78,3 +78,6 @@
 .van-dropdown-item{
   margin:0 20rpx !important
 }
+.van-popup--top{
+  max-height:600rpx !important;
+}

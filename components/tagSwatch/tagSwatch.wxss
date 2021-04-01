@@ -29,3 +29,7 @@
   border-right: 12rpx solid transparent;
   border-top:20rpx solid #000000;
 }
+.flex-center{
+  display: flex;
+  justify-content: center;
+}

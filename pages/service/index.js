@@ -13,6 +13,11 @@ Page({
       {icon:'map-marked',name:'研究平台/设备',path:'/pages/service/yjptsb/index',color:'#FFCC99'}
     ]
   },
+  onFocus(){
+    wx.navigateTo({
+      url: '/pages/allOfSearch/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -33,11 +38,11 @@ Page({
   onShow(){
     app.setTabBar();
     wx.setNavigationBarColor({
-      backgroundColor: wx.getStorageSync('color'),
+      backgroundColor: '#D3D3D3'||wx.getStorageSync('color'),
       frontColor: '#ffffff',
     })
     this.setData({
-      color:wx.getStorageSync('color'),
+      color:'#D3D3D3'||wx.getStorageSync('color'),
       path:"/"+getCurrentPages()[0].route
     })
   },

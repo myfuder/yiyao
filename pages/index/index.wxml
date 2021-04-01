@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container" style="margin-bottom:130rpx">
   <navbar left="32rpx" navColor="{{scrollTop>90?color:''}}"  navTitle="{{navTitle}}" isWhite="false" ></navbar>
-  <image src="{{home_bg}}" style="background:{{color}};border-bottom-left-radius:70rpx;border-bottom-right-radius:70rpx;z-index:-1;width:100%;position:absolute;top:0;height:420rpx;width:100%;"></image>
+  <image src="../../common/faxianbg.jpg" style="background:{{color}};border-bottom-left-radius:70rpx;border-bottom-right-radius:70rpx;z-index:-1;width:100%;position:absolute;top:0;height:420rpx;width:100%;"></image>
   <view style="padding:0 30rpx;padding-top:{{navHeight}}px;">
     <view class="search-area">
       <view class="search-top">
@@ -32,9 +32,9 @@
     </view>
   </view>
   <view style="padding:0 30rpx;">
-    <card title="新闻资讯">
+    <!-- <card title="新闻资讯">
       <navigator  url='' wx:for="{{xw_data}}" class="flex-center" style="background:#F4F8FB;padding:30rpx 0;{{index>0?'border-top:1px solid #EDEDED':''}}">
-        <!-- <image mode="aspectFit" style="width:140rpx;height:140rpx;margin:0 30rpx;" src="{{item.fileUrl}}"></image> -->
+      <image mode="aspectFit" style="width:140rpx;height:140rpx;margin:0 30rpx;" src="{{item.fileUrl}}"></image>
         <view class="flex-col-center space-between " style="text-align:left;height:140rpx;width:calc(100% - 140rpx);">
           <text class="text-overflow-3" style="font-size:26rpx;line-height:1.5;color:#333333">{{item.articleTitle}}</text>
           <text style="color:#999999;font-size:24rpx">{{item.createTime}}</text>
@@ -55,22 +55,59 @@
           </view>   
         </view>
       </view>
-    </card>
+    </card> -->
     <card title="发现">
-      <navigator  url='' wx:for="{{fx_data}}" class="flex-center" style="background:#F4F8FB;padding:30rpx 0;{{index>0?'border-top:1px solid #EDEDED':''}}">
+      <navigator  url='/pages/details/detail1/index?id={{item.id}}&type={{item.type}}' wx:for="{{fx_data}}" class="" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
         <!-- <image mode="aspectFit" style="width:140rpx;height:140rpx;margin:0 30rpx;" src="{{item.fileUrl}}"></image> -->
-        <view class="flex-col-center space-between " style="text-align:left;height:140rpx;width:calc(100% - 140rpx);">
-          <text class="text-overflow-3" style="font-size:26rpx;line-height:1.5;color:#333333">{{item.articleTitle}}</text>
-          <text style="color:#999999;font-size:24rpx">{{item.createTime}}</text>
+        <view class="flex-col-center space-between " style="text-align:left;">
+          <text class="text-overflow-one" style="font-size:30rpx;font-weight:bold;color:#333333">{{item.title}}</text>
+          <text class="text-overflow-two" style="font-size:26rpx;margin-top:10rpx;margin-bottom:20rpx">{{item.content}}</text>
+          <view class="align-item-center" style="margin-top:20rpx;flex-wrap: wrap;">
+            <view style="margin-right:20rpx">
+              <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
+              <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
+            </view>
+            <view style="margin-right:20rpx">
+              <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
+              <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>
+            </view>
+            <view style="margin-right:20rpx">
+              <i class="iconfont icon-pinglun" style="font-size:32rpx;color:#F78842"></i>
+              <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.comments}}</text>
+            </view>
+            <view>
+              <i class="iconfont icon-shijian1" style="font-size:30rpx;color:#FC6A63"></i>
+              <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.time}}</text>
+            </view>
+          </view>
         </view>
       </navigator>
     </card>
     <card title="互动">
-      <navigator  url='' wx:for="{{hd_data}}" class="flex-center" style="background:#F4F8FB;padding:30rpx 0;{{index>0?'border-top:1px solid #EDEDED':''}}">
+      <navigator  url='/pages/details/detail1/index?id={{item.id}}&type={{item.type}}' wx:for="{{hd_data}}" class="" style="position:relative;background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
         <!-- <image mode="aspectFit" style="width:140rpx;height:140rpx;margin:0 30rpx;" src="{{item.fileUrl}}"></image> -->
-        <view class="flex-col-center space-between " style="text-align:left;height:140rpx;width:calc(100% - 140rpx);">
-          <text class="text-overflow-3" style="font-size:26rpx;line-height:1.5;color:#333333">{{item.articleTitle}}</text>
-          <text style="color:#999999;font-size:24rpx">{{item.createTime}}</text>
+        <van-tag style="position:absolute;right:0;top:-8rpx" color="{{color}}" type="primary">{{item.type}}</van-tag>
+        <view class="flex-col-center space-between " style="text-align:left;">
+          <text class="text-overflow-one" style="font-size:30rpx;font-weight:bold;color:#333333">{{item.title}}</text>
+          <text class="text-overflow-two" style="font-size:26rpx;margin-top:10rpx;margin-bottom:20rpx">{{item.content}}</text>
+          <view class="align-item-center" style="margin-top:20rpx;flex-wrap: wrap;">
+            <view style="margin-right:20rpx">
+              <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
+              <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
+            </view>
+            <view style="margin-right:20rpx">
+              <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
+              <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>
+            </view>
+            <view style="margin-right:20rpx">
+              <i class="iconfont icon-pinglun" style="font-size:32rpx;color:#F78842"></i>
+              <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.comments}}</text>
+            </view>
+            <view>
+              <i class="iconfont icon-shijian1" style="font-size:30rpx;color:#FC6A63"></i>
+              <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.time}}</text>
+            </view>
+          </view>
         </view>
       </navigator>
     </card>

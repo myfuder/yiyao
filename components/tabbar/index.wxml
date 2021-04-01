@@ -1,8 +1,8 @@
 
 <view class="tabbar flex-center space-between">
   <block wx:for="{{tabBar}}">
-    <navigator url="{{item.pagePath}}" style="width:{{100/tabBar.length}}%" open-type="redirect" class="tabbar-nav flex-col-center align-item-center">    
-      <i class="iconfont {{item.icon}}" style="font-size:50rpx;color:{{item.active?color:''}}"></i> 
+    <navigator hover-class="none" url="{{item.pagePath}}" style="width:{{100/tabBar.length}}%" open-type="redirect" class="tabbar-nav flex-col-center align-item-center">    
+      <i class="iconfont {{item.icon}} formal {{item.isTuchu?'tuchu':''}}" style="color:{{item.active?color:''}}"></i> 
       <text style="color:{{item.active?color:''}}">{{item.label}}</text>    
     </navigator>    
   </block>

@@ -13,7 +13,13 @@
     "pages/service/yjjs/index",
     "pages/service/ggpt/index",
     "pages/service/yjptsb/index",
-    "pages/mine/info/index"
+    "pages/mine/info/index",
+    "pages/mine/demind/index",
+    "pages/mine/mykgfw/index",
+    "pages/mine/kysc/index",
+    "pages/mine/tongz/index",
+    "pages/details/detail1/index",
+    "pages/service/kgfw/detail/index"
   ],
   "usingComponents": {
     "van-row": "@vant/weapp/row",

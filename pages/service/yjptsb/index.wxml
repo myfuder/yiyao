@@ -7,60 +7,73 @@
       placeholder="请输入搜索关键词"
       use-action-slot
       background="{{color}}"
-      bind:search="onSearch"
-      bind:change="onChange"
-      bind:cancel="onCancel">
+      bind:focus="onFocus">
       <view slot="action">
         <i bind:tap="onClickPailie" class="iconfont {{direction == 0?'icon-liebiaopailie':'icon-fenleipailie'}}" style="font-size:50rpx;color:#fff"></i>
-        <i wx:if="{{currOption.screen}}" bind:tap="onClickPopup" class="iconfont icon-shaixuan" style="font-size:50rpx;color:#fff;margin-left:20rpx"></i>
       </view>
       </van-search>
   </view>
-  <van-popup show="{{ showPopup }}"  position="right"
-  custom-style="width: 70%;height:100%;padding:20rpx" bind:close="onClosePopup">
-    <view wx:for="{{currOption.screen}}" style="">
-      <view class="align-item-center">
-        <i class="iconfont {{item.active?'icon-duoxuan':'icon-duoxuan1'}}" data-item="{{item}}" bindtap="onChangeScreen" style="font-size:30rpx;color:{{color}}"></i>
-        <text style="font-size:32rpx;font-weight:bold;margin-left:10rpx;line-height:2"  data-item="{{item}}" bindtap="onChangeScreen">{{item.value}}</text>
-      </view>
-      <view style="display: flex;justify-content: flex-start;flex-wrap: wrap;">
-        <text wx:for="{{item.data}}" wx:for-item="itemc" data-item="{{item}}" data-itemc="{{itemc}}" bindtap="onChangeScreenItem" style="margin:20rpx 6rpx;padding:0 20rpx;border-radius:20rpx;font-size: 28rpx;line-height: 40rpx;height: 40rpx; {{itemc.active?'color:#fff;background:'+color:'background:#F4F8FB'}} ">{{itemc.value}}
-        </text>
-      </view>
-    </view>
-  </van-popup>
   <view >
     <view class="">
-      <tagswatch normalstyle="font-weight:bold;margin-top:20rpx;margin-bottom:0 !important" activestyle="" between="{{true}}" options="{{options}}" right="66rpx" bind:handleEvent="onHandleTag" bind:onTagItemChange="onTagItemChange">
+      <tagswatch normalstyle="font-weight:bold;margin-top:20rpx;margin-bottom:0 !important" activestyle="border-bottom:2rpx solid {{color}} !important" between="{{true}}" options="{{options}}" right="66rpx" bind:handleEvent="onHandleTag" bind:onTagItemChange="onTagItemChange">
       </tagswatch>
       <!-- <text wx:for="{{typeOptions}}" catchtap="onChangeType" data-item="{{item}}" class="{{typeActive==item.id?'type-active':''}}" style="{{typeActive==item.id?'color:'+color:''}}">{{item.value}}</text> -->
     </view>
-    <view class="" style="background:#F4F8FB;height:calc(100vh - 128rpx - 88rpx - 148rpx);overflow:auto;margin:20rpx;padding-top:20rpx;">
+    <view class="" style="height:calc(100vh - 136rpx - 96rpx);overflow:auto;padding-top:20rpx;">
       <van-dropdown-menu wx:if="{{tagValue == '0'}}" active-color="{{color}}">
-        <van-dropdown-item wx:for="{{optionsType}}" title-class="customclass" value="{{ item.value }}" options="{{item.childOptions}}" />
+        <van-dropdown-item title-class="customclass" value="{{yqActive}}" options="{{yqOptions}}" bind:change="yqdropChange"/>
+        <van-dropdown-item title-class="customclass" value="{{sbActive}}" options="{{sbOptions}}" bind:change="sbdropChange"/>
       </van-dropdown-menu>
-      <navigator wx:if="{{direction==0}}" url='' wx:for="{{20}}" class="flex-center" style="padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
-          <view class="flex-col-center space-between " style="text-align:left;width:100%;height:180rpx;">
-            <view>
-              <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333">dasdadasdadasdadasdadasdadasda</text>
-              <text class="text-overflow-two" style="color:#999999;font-size:26rpx;margin-top:20rpx;">dadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdasda</text>
-            </view>
-            <text style="color:#999999;font-size:24rpx">dasda</text>
+      <navigator wx:if="{{direction==0&&tagValue == 0}}" url='' wx:for="{{sb_data}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
+        <van-image width="180rpx" height="150rpx;" fit="scale-down" src="{{basUrl+item.url}}">
+          <!-- <text slot="error">加载失败</text> -->
+        </van-image>
+        <view class="flex-col-center space-between " style="text-align:left;width:calc(100% - 180rpx);margin-left:20rpx">
+          <view style="line-height:1.5">
+            <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333">{{item.equipmentName}}</text>
+            <text class="text-overflow-one" style="color:#999999;font-size:26rpx;;">设备型号：{{item.typeName}}</text>
+            <text class="text-overflow-one" style="color:#999999;font-size:26rpx;;">管理人员：{{item.admin1}}【{{item.adminPhone1}}】</text>
+            <text class="text-overflow-one" style="color:#999999;font-size:26rpx;;">管理科室：{{item.deptName}}</text>
+            <text class="text-overflow-3" style="color:#999999;font-size:26rpx;;">存放位置：{{item.parkName}}</text>
           </view>
-        </navigator>
-        <van-row wx:if="{{direction==1}}" gutter="10">
-          <van-col wx:for="{{20}}" span="12">
-            <navigator url='' class="flex-center" style="background:#F4F8FB;margin-bottom:20rpx;padding:10rpx 20rpx;">
-              <view class="flex-col-center space-between " style="text-align:left;width:100%;height:290rpx;">
-                <view>
-                  <text class="text-overflow-two" style="-webkit-line-clamp: 1;font-size:30rpx;line-height:1.5;color:#333333">dasdadasdadasdadasdadasdadasda</text>
-                  <text class="text-overflow-two" style="-webkit-line-clamp: 5;color:#999999;font-size:26rpx;margin-top:20rpx;">dadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdasda</text>
-                </view>
-                <text style="color:#999999;font-size:24rpx">dasda</text>
-              </view>
-            </navigator>
-          </van-col>
-        </van-row>
+          <!-- <text style="color:#999999;font-size:24rpx">dasda</text> -->
+        </view>
+      </navigator>
+      <navigator wx:if="{{direction==0&&tagValue == 1}}" url='' wx:for="{{pt_data}}" class="" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
+        <view class="" style="text-align:left;margin-left:20rpx">
+          <view style="line-height:1.5">
+            <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333">{{item.equipmentName}}</text>
+            <text class="text-overflow-two" style="-webkit-line-clamp: 4;color:#999999;font-size:26rpx;margin-top:10rpx;">{{item.detail}}</text>
+          </view>
+          <!-- <text style="color:#999999;font-size:24rpx">dasda</text> -->
+        </view>
+      </navigator>
+      <van-row wx:if="{{direction==1&&tagValue == 0}}" gutter="{{10}}">
+        <van-col wx:for="{{sb_data}}" span="{{12}}">
+          <navigator url='/pages/details/detail1/index?id={{item.myid}}&type=科技服务' class="flex-col-center" style="background:#F4F8FB;margin-bottom:20rpx;padding:10rpx 20rpx;">
+            <van-image width="100%" height="calc(50vw*0.7)" fit="scale-down" src="{{basUrl+item.url}}">
+              <!-- <text slot="error">加载失败</text> -->
+            </van-image>
+            <view class="flex-col-center space-between " style="height:350rpx;text-align:left;width:100%;line-height:1.5">
+              <text class="text-overflow-two" style="font-size:30rpx;line-height:1.5;color:#333333">{{item.equipmentName}}</text>
+              <text class="text-overflow-two" style="color:#999999;font-size:24rpx;;">设备型号：{{item.typeName}}</text>
+              <text class="text-overflow-two" style="color:#999999;font-size:24rpx;;">管理人员：{{item.admin1}}【{{item.adminPhone1}}】</text>
+              <text class="text-overflow-two" style="color:#999999;font-size:24rpx;;">管理科室：{{item.deptName}}</text>
+              <text class="text-overflow-3" style="color:#999999;font-size:24rpx;;">存放位置：{{item.parkName}}</text>
+            </view>
+          </navigator>
+        </van-col>
+      </van-row>
+      <van-row wx:if="{{direction==1&&tagValue == 1}}" gutter="{{10}}">
+        <van-col wx:for="{{pt_data}}" span="{{12}}">
+          <navigator url='/pages/details/detail1/index?id={{item.myid}}&type=科技服务' class="flex-col-center" style="background:#F4F8FB;margin-bottom:20rpx;padding:10rpx 20rpx;">
+            <view class="flex-col-center space-between " style="height:240rpx;text-align:left;width:100%;line-height:1.5">
+              <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333">{{item.equipmentName}}</text>
+              <text class="text-overflow-two" style="-webkit-line-clamp: 5;color:#999999;font-size:26rpx;margin-top:10rpx;">{{item.detail}}</text>
+            </view>
+          </navigator>
+        </van-col>
+      </van-row>
     </view>
   </view>
 </view>

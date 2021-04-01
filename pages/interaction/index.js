@@ -1,5 +1,9 @@
-// pages/discovery/index.js
 const app = getApp()
+import {
+  ajax,debounce
+} from '../../utils/util';
+
+let _self;
 Page({
 
   /**
@@ -8,20 +12,31 @@ Page({
   data: {
     typeActive:'',
     direction:0,  //0列表 1方格
+    key:'',
     value:'',
-    tagValue:'0',
+    tagValue:'',
+    tagItemValue:'',
+    pageNo:'',
+    
     options:[
-      {
-        label:'分享',
-        value:'0',
-        childOptions:[{ text: '全部', value: 0 },{ text: '分享信息', value: 1 },{ text: '技术合作', value: 2 }]
-      },{
-        label:'需求',
-        value:'1',
-        childOptions:[{ text: '全部', value: 0 },{ text: '需求信息', value: 1 },{ text: '其他', value: 2 }]
-      }
     ],
+    hd_data:[
+      // {
+      //   type:'分享信息',
+      //   articleTitle:'求隐睾患者样品',
+      //   content:'目前本人及合作者通过2个隐睾家系锁定了几个候选变异。希望能通过进一步扩大隐睾的样品，以精确锁定相关致病基因和变异。现诚寻临床样本合作者，来提高变异鉴定的准确性。为祖国科研做贡献。',
+      //   createTime:'2021-01-13'
+      // },
+    ]
   },
+  onChange: debounce(function(e){
+    _self.setData({
+      key: e.detail,
+    });
+    _self.getList(1)
+    console.log( _self.data.key)
+    // _self.getSomeDataFromServer()
+  }),
   onChangeType(e){
     let item = e.currentTarget.dataset.item
     this.setData({
@@ -44,16 +59,54 @@ Page({
     this.setData({
       tagValue:e.detail
     })
+    this.getList(1)
     // this.setData({ showPopup: false });
   },
   onTagItemChange(e){
-    console.log(e.detail)
+    this.setData({
+      tagItemValue:e.detail
+    })
+    this.getList(1)
+  },
+  // /api/inter/filter
+  getOptions(){
+    ajax.get(`/api/inter/filter`).then((res)=>{
+      let subs = res.data
+      this.setData({
+        options:Object.keys(subs).map((key)=>{
+          return {
+            label:key,
+            value:key,
+            childOptions:subs[key]?subs[key].records.map((item)=>{
+              return { text: item.name, value: item.name }
+            }):[]
+          }
+        })
+      })
+      this.setData({
+        options:this.data.options
+      })
+    })
+  },
+  getList(pageNo,key){
+    ajax.get(`/api/find/search?pageNo=${pageNo}&pageSize=100&range=互动&type=${this.data.tagValue}&subtype=${this.data.tagItemValue}&kw=${this.data.key}`).then((res)=>{
+      this.setData({
+        hd_data:res.data.resultVo.content.map((item)=>{
+          return  {...item}
+        })
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    _self = this;
+    this.setData({
+      key:options.value||'',
+    })
+    this.getOptions()
+    this.getList(1)
   },
 
   /**
@@ -69,11 +122,11 @@ Page({
   onShow(){
     app.setTabBar();
     wx.setNavigationBarColor({
-      backgroundColor: wx.getStorageSync('color'),
+      backgroundColor: '#254A8A'||wx.getStorageSync('color'),
       frontColor: '#ffffff',
     })
     this.setData({
-      color:wx.getStorageSync('color'),
+      color:'#254A8A'||wx.getStorageSync('color'),
       path:"/"+getCurrentPages()[0].route
     })
   },

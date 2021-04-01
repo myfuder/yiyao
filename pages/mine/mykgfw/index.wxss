@@ -1,0 +1,5 @@
+/* pages/mine/mykgfw/index.wxss */
+
+.van-cell:after{
+  border:none !important
+}

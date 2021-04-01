@@ -1,4 +1,5 @@
 // pages/mine/index.js
+import {ajax,debounce} from '../../utils/util'
 const app = getApp()
 Page({
 
@@ -9,11 +10,19 @@ Page({
     checked:true
   },
 
+  ttt(){
+    
+  },
+  getUserInfo(){
+    ajax.get(`/api/user/profile`).then((item)=>{
+      debugger
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getUserInfo()
   },
 
   /**

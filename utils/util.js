@@ -44,7 +44,47 @@ function debounce(func, wait=500) {
       }, wait);  // 指定 xx ms 后触发真正想进行的操作 handler
   };
 }
+const basUrl = "http://daxia.free.idcfengye.com"
+var ajax_ = (params) => new Promise((resolve, reject) => {
+  wx.request({
+    method: params.method,
+    url: basUrl+params.url,
+    data: params.data || params.params,
+    header: {
+      'content-type': 'x-www-form-urlencoded',
+      'Cookie':wx.getStorageSync('cookie'),
+      'X-Requested-With':'X-Requested-With'
+    //   'Authorization': wx.getStorageSync('token')
+    },
+    success(res) {
+      console.log(res)
+      var data = res.data;
+      resolve(data);
+    },
+    fail(e) {
+      reject(e);
+    }
+  });
+});
+const ajax = {
+  post(url, options) {
+    var params = {};
+    params.method = 'POST';
+    params.url = url;
+    params.data = options;
+    return ajax_(params);
+  },
+  get(url, options) {
+    var params = {};
+    params.method = 'GET';
+    params.url = url;
+    params.data = options;
+    return ajax_(params);
+  }
+};
 module.exports = {
   formatTime,
-  debounce
+  debounce,
+  ajax,
+  basUrl
 }

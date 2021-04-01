@@ -3,12 +3,14 @@
 
 <view>
   <view class="flex-center" style="position:absolute;right:40rpx;top:40rpx;">
-    <van-image
-      round
-      width="160rpx"
-      height="160rpx"
-      src="https://img.yzcdn.cn/vant/cat.jpeg"
-    />
+    <van-uploader bind:after-read="afterRead">
+      <van-image
+        round
+        width="160rpx"
+        height="160rpx"
+        src="{{headImage}}"
+      />
+    </van-uploader>
   </view>
   <form bindsubmit="formsubmit">
     <!-- <van-cell-group title="分组1"> -
@@ -20,7 +22,7 @@
       <view style="padding:0 30rpx">
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">姓名</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="username" value="{{ username }}"  placeholder="请输入姓名" bind:click-icon="onClickIcon"/>
+          <van-field name="username" value="{{ username }}"  placeholder="请输入姓名" data-tt="dasds" bindinput="das" bind:click-icon="onClickIcon"/>
         </view>
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">性别</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
@@ -108,15 +110,12 @@
           <van-field name="title" value="{{ username }}"  placeholder="请输入职称" bind:click-icon="onClickIcon"/>
         </view>
       </view>
-      <text style="font-weight:bold;font-size:30rpx;">标签</text>
+      <text style="font-weight:bold;font-size:30rpx;">我的兴趣</text>
       <view style="padding:30rpx">
-        <van-field name="tags" value="{{ tags }}"  placeholder="请输入职称" bind:click-icon="onClickIcon">
-          <view slot="input">
-            <van-tag wx:for="{{6}}" style="margin-right:20rpx" color="{{color}}" closeable size="medium" type="primary" id="primary" bind:close="onTagClose">
-              标签
-            </van-tag>
-          </view>
-        </van-field>
+        <van-tag wx:for="{{tags}}" style="margin-right:20rpx" color="{{color}}" closeable size="medium" type="primary" id="primary" bind:close="onTagClose">
+          {{item}}
+        </van-tag>
+        <van-field name="tags" value="{{ tagValue }}"  placeholder="请输入自定义标签" bind:blur="onBlurTags"></van-field>
       </view>
     </view>
     <view style="padding:30rpx">

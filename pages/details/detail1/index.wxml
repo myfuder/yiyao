@@ -1,0 +1,51 @@
+<!--富文本-->
+<view hidden="{{detail == ''}}" >
+  <button class="flex-center align-item-center" style="position: fixed;z-index: 1000;bottom:140rpx;right:60rpx;padding:0;width:100rpx;height:100rpx;font-size:26rpx;border-radius:50%;color:{{color}};border:1px solid {{color}}">收藏</button>
+  <view style="padding:0 40rpx;">
+    <view wx:if="{{type == '科技论文'}}" class="wxParse" style="color:666666;font-size:28rpx">
+    <text>Format: abstract</text>
+    <mp-html content="{{detail.summary}}" />
+  </view>
+  <view style="border-bottom:1px solid #000000;text-align:left;padding:20rpx 0;">
+    <text style="font-weight:bold">{{ detail.title }}</text>
+    <view wx:if="{{type != '科技论文'}}" style="font-size:26rpx;line-height: 1.5;margin-top:20rpx">
+      <text>负责人：{{detail.dutyName}} 科室：{{detail.dutyDepartment}} 类型：{{detail.type}}-{{detail.subtype}} 时间：{{detail.time}} · {{detail.views}}阅读</text>
+    </view>
+  </view>
+  <view>
+    <text wx:for="{{joinuser}}" style="font-size:28rpx;">
+      <text style="font-weight:bold">{{item.name}}</text>[{{item.department}}-{{item.role}}]
+    </text>
+  </view> 
+  <view style="margin-top:40rpx;font-size:30rpx">
+    <mp-html wx:if="{{detail.detail}}" content="{{detail.detail}}" />
+    <text wx:else>暂未获得摘要</text>
+  </view>
+  </view>
+  <view >
+    <van-field
+      type="textarea"
+      value="{{ msg }}"
+      maxlength="200"
+      placeholder="我有话说~~"
+      border="{{ false }}"
+      bind:change="onChange"
+      custom-style="margin-top:20rpx;"
+      style="--field-input-text-color:#666666;--field-text-area-min-height:200rpx;--cell-vertical-padding:0rpx;--cell-horizontal-padding:40rpx">
+    </van-field>
+    <view style="text-align:start;margin-bottom:20rpx">
+      <van-button bind:click="sendComment" type="primary" size="small" style="margin-left:40rpx" color="{{color}}">发布</van-button>
+    </view>
+    <view wx:for="{{commentList}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
+      <van-image width="100rpx" height="100rpx;" fit="scale-down" src="{{basUrl+item.author.avatar}}">
+      </van-image>
+      <view class="flex-col-center " style="text-align:left;width:calc(100% - 100rpx);margin-left:20rpx">
+        <view class="space-between">
+          <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:{{color}}">{{item.author.username}}</text>
+          <text style='color:#999999;font-size:24rpx'>{{item.created}}</text>
+        </view>
+        <text class="text-overflow-two" style="font-size:26rpx;coor:#333333;line-height: 1.5;margin-top: 10rpx;">{{item.content}}</text>
+      </view>
+    </view>
+  </view>
+</view>

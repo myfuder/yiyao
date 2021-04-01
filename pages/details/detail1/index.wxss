@@ -1,0 +1,17 @@
+/* pages/details/detail1/index.wxss */
+.title-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+.title-area text {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: bold;
+}
+.rich-area {
+  padding: 24rpx;
+  font-size: 28rpx;
+  color: #333333;
+}

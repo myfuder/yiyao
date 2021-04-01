@@ -18,18 +18,29 @@ Page({
     history:[
       {name:'ewrwe'}, {name:'ewrweefdsfsfsf'}, {name:'ewrwedas'}, {name:'ewrwedasdasda'}, {name:'ewrweadadadadasdadadasda'}, {name:'ewrwedasda'}, {name:'ewrwe'}
     ],
+    tuij:[
+      {name:'基因'}, {name:'lung cancer'}, {name:'cancer'}
+    ],
     hots:[
       {name:'ewrwe'}, {name:'ewrweefdsfsfsf'}, {name:'ewrwedas'}, {name:'ewrwedasdasda'}, {name:'ewrweadadadadasdadadasda'}, {name:'ewrwedasda'}, {name:'ewrwe'}
     ],
-    searchs:[
-      {title:'样品'},{title:'样品'},{title:'样品'},{title:'样品'},
-      {title:'样品'},{title:'样品'},{title:'样品'},{title:'样品'},
-      {title:'样品'}
-    ]
+  },
+  onChangeType(e){
+    let item = e.currentTarget.dataset.item
+    this.setData({
+      typeActive:item.id,
+    })
+    // this.getSomeDataFromServer()
   },
   onChangeDrow(e){
     this.setData({
       searchvalue:e.detail
+    })
+    // this.getSomeDataFromServer()
+  },
+  getSomeDataFromServer(){
+    wx.showToast({
+      title: this.data.searchvalue+' '+this.data.value+' '+this.data.typeActive,
     })
   },
   onChange: debounce(function(e){
@@ -37,20 +48,21 @@ Page({
       value: e.detail,
     });
     console.log( _self.data.value)
+    // _self.getSomeDataFromServer()
   }),
   onSearch(e) {
     let value = e.currentTarget.dataset.value || this.data.value
-    // wx.showToast({
-    //   icon:'none',
-    //   title: value,
-    // })
+    // _self.setData({
+    //   value: value,
+    // });
+    // this.getSomeDataFromServer()
     if(value == ''){
        wx.showToast({
         icon:'none',
         title: '搜索内容不能为空',
       })
     }else{
-      wx.reLaunch({
+      wx.navigateTo({
         url: this.data.searchvalue+'?value='+value,
       })
     }

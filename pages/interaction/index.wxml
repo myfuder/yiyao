@@ -3,7 +3,7 @@
 <view>
   <view style="padding:30rpx 0;background:{{color}}">
     <van-search
-      value="{{ value }}"
+      value="{{ key }}"
       placeholder="请输入搜索关键词"
       use-action-slot
       background="{{color}}"
@@ -31,35 +31,77 @@
   </van-popup>
   <view >
     <view class="">
-      <tagswatch normalstyle="font-weight:bold;margin-top:20rpx;margin-bottom:0 !important" activestyle="border-bottom:4rpx solid #0B509D !important" between="{{true}}" options="{{options}}" right="66rpx" bind:handleEvent="onHandleTag" bind:onTagItemChange="onTagItemChange">
+      <tagswatch normalstyle="font-weight:bold;margin-top:20rpx;margin-bottom:0 !important" activestyle="border-bottom:4rpx solid {{color}} !important" between="{{true}}" options="{{options}}" right="66rpx" bind:handleEvent="onHandleTag" bind:onTagItemChange="onTagItemChange">
       </tagswatch>
       <!-- <text wx:for="{{typeOptions}}" catchtap="onChangeType" data-item="{{item}}" class="{{typeActive==item.id?'type-active':''}}" style="{{typeActive==item.id?'color:'+color:''}}">{{item.value}}</text> -->
     </view>
     <view class="" style="height:calc(100vh - 128rpx - 88rpx - 148rpx);overflow:auto;padding:20rpx">
-      <navigator wx:if="{{direction==0}}" url='' wx:for="{{20}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
+      <view wx:if="{{direction==0}}">
+        <navigator url='/pages/details/detail1/index?id={{item.id}}&type={{item.type}}' wx:for="{{hd_data}}" class="flex-center" style="position:relative;background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
+          <van-tag style="position:absolute;right:0;top:-8rpx" color="{{color}}" type="primary">{{item.type}}</van-tag>
           <view class="flex-col-center space-between " style="text-align:left;width:100%;height:180rpx;">
             <view>
-              <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333">dasdadasdadasdadasdadasdadasda</text>
-              <text class="text-overflow-two" style="color:#999999;font-size:26rpx;margin-top:20rpx;">dadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdasda</text>
+              <rich-text nodes="{{item.title}}" class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333"></rich-text>
+              <rich-text nodes="{{item.summary}}" class="text-overflow-two" style="color:#999999;font-size:26rpx;margin-top:10rpx;"></rich-text>
             </view>
-            <text style="color:#999999;font-size:24rpx">dasda</text>
+            <view class="align-item-center">
+              <view style="margin-right:20rpx">
+                <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
+                <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
+              </view>
+              <view style="margin-right:20rpx">
+                <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
+                <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>
+              </view>
+              <view style="margin-right:20rpx">
+                <i class="iconfont icon-pinglun" style="font-size:32rpx;color:#F78842"></i>
+                <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.comments}}</text>
+              </view>
+              <view>
+                <i class="iconfont icon-shijian1" style="font-size:30rpx;color:#FC6A63"></i>
+                <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.time}}</text>
+              </view>
+            </view>
           </view>
         </navigator>
-        <van-row wx:if="{{direction==1}}" gutter="10">
-          <van-col wx:for="{{20}}" span="12">
-            <navigator url='' class="flex-center" style="background:#F4F8FB;margin-bottom:20rpx;padding:10rpx 20rpx;">
+      </view>
+      <!-- tagValue -->
+      <view wx:if="{{direction==1}}">
+        <van-row gutter="10">
+          <van-col wx:for="{{hd_data}}" span="12">
+            <navigator url='/pages/details/detail1/index?id={{item.id}}&type={{item.type}}' class="flex-center" style="background:#F4F8FB;margin-bottom:20rpx;padding:10rpx 20rpx;">
               <view class="flex-col-center space-between " style="text-align:left;width:100%;height:290rpx;">
                 <view>
-                  <text class="text-overflow-two" style="-webkit-line-clamp: 1;font-size:30rpx;line-height:1.5;color:#333333">dasdadasdadasdadasdadasdadasda</text>
-                  <text class="text-overflow-two" style="-webkit-line-clamp: 5;color:#999999;font-size:26rpx;margin-top:20rpx;">dadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdasda</text>
+                  <rich-text nodes="{{item.title}}" class="text-overflow-two" style="-webkit-line-clamp: 1;font-size:30rpx;line-height:1.5;color:#333333"></rich-text>
+                  <rich-text nodes="{{item.summary}}" class="text-overflow-two" style="-webkit-line-clamp: 5;color:#999999;font-size:26rpx;margin-top:10rpx;"></rich-text>
                 </view>
-                <text style="color:#999999;font-size:24rpx">dasda</text>
+                <view>
+                  <view class="align-item-center">
+                    <view style="margin-right:20rpx">
+                      <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
+                      <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
+                    </view>
+                    <view style="margin-right:20rpx">
+                      <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
+                      <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>
+                    </view>
+                    <view style="margin-right:20rpx">
+                      <i class="iconfont icon-pinglun" style="font-size:32rpx;color:#F78842"></i>
+                      <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.comments}}</text>
+                    </view>
+                  </view>
+                  <!-- <view>
+                    <i class="iconfont icon-shijian1" style="font-size:30rpx;color:#FC6A63"></i>
+                    <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.time}}</text>
+                  </view> -->
+                </view>
               </view>
             </navigator>
           </van-col>
         </van-row>
+      </view>
     </view>
   </view>
-  <tabbar tabBar="{{tabBar||[]}}"></tabbar>
+  <tabbar tabBar="{{tabBar||[]}}" color="{{color}}"></tabbar>
 </view>
 

@@ -1,4 +1,7 @@
 // app.js
+import {
+  ajax
+} from './utils/util';
 App({
   onLaunch() {
     wx.getSystemInfo({
@@ -37,6 +40,11 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        ajax.post(`/api/login?id=10001&password=123456`).then((res)=>{
+          if(res.header&&res.header["Set-Cookie"]){
+            wx.setStorageSync('cookie', res.header["Set-Cookie"])
+          }
+        })
       }
     })
     // 获取用户信息
@@ -91,18 +99,21 @@ App({
         'pagePath': '/pages/discovery/index',
         'label':"发现",
         'value':'faxi',
+        isTuchu:true,
         'icon':'icon-faxian',
       },
       {
         'pagePath': '/pages/service/index',
         'label':"服务",
         'value':'fuwu',
+        isTuchu:true,
         'icon':'icon-fuwu',
       },
       {
         'pagePath': '/pages/interaction/index',
         'label':"互动",
         'value':'hudo',
+        isTuchu:true,
         'icon':'icon-yuangonghudong',
       },
       {

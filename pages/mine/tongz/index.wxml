@@ -1,0 +1,14 @@
+<!--pages/mine/tongz/index.wxml-->
+
+<view>
+  <view wx:for="{{list}}" class="align-item-center" style="padding:0 20rpx;">
+    <image style="width:100rpx;height:100rpx;background:#f00;border-radius:50%;"/>
+    <view style="padding:30rpx 0;width: calc(100% - 120rpx);margin-left:20rpx;border-bottom:1px solid #EDEDED">
+      <view class="space-between">
+        <text style="font-size:32rpx;font-weight:bold">{{item.title}}</text>
+        <text style="font-size:24rpx;color:#a5a5a5">{{item.datetime}}</text>
+      </view>
+      <view style="font-size:26rpx;margin-top:20rpx;">{{item.content}}</view>
+    </view>
+  </view>
+</view>
