@@ -33,7 +33,7 @@
     <view class="fx-left">
       <text wx:for="{{typeOptions}}" catchtap="onChangeType" data-item="{{item}}" class="{{typeActive==item.id?'type-active':''}}" style="{{typeActive==item.id?'color:'+color:''}}">{{item.value}}</text>
     </view>
-    <view class="fx-right" style="background: url('../../beauty.png')">
+    <scroll-view class="fx-right" scroll-y="true" bindscrolltolower="scroll"  style="background: url('../../beauty.png')">
       <navigator wx:if="{{direction==0}}" url='/pages/details/detail1/index?id={{item.id}}&type={{item.type}}' wx:for="{{fx_data}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
           <view class="flex-col-center space-between " style="text-align:left;width:100%;">
             <view>
@@ -41,10 +41,10 @@
               <rich-text nodes="{{item.summary}}" class="text-overflow-two" style="color:#999999;font-size:26rpx;margin-top:10rpx;height:70rpx;"></rich-text>
             </view>
             <view class="align-item-center" style="margin-top:20rpx;flex-wrap: wrap;">
-                  <view style="margin-right:20rpx">
+                  <navigator url='{{item.author.id?"/pages/userDescInfo/index?userId="+item.author.id:""}}' style="margin-right:20rpx">
                     <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
-                    <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
-                  </view>
+                    <text style="margin-left:8rpx;color:#999999;font-size:24rpx;{{item.author.id?'text-decoration: underline;':''}}">{{item.dutyName}}</text>
+                  </navigator>
                   <view style="margin-right:20rpx">
                     <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
                     <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>
@@ -65,14 +65,14 @@
             <navigator url='/pages/details/detail1/index?id={{item.id}}&type={{item.type}}' class="flex-center" style="background:#F4F8FB;margin-bottom:20rpx;padding:10rpx 20rpx;">
               <view class="flex-col-center space-between " style="text-align:left;">
                 <view>
-                  <text class="text-overflow-two" style="-webkit-line-clamp: 1;font-size:30rpx;line-height:1.5;color:#333333">{{item.title}}</text>
-                  <text class="text-overflow-two" style="-webkit-line-clamp: 4;color:#999999;font-size:26rpx;margin-top:10rpx;height:140rpx;">{{item.content}}</text>
+                  <rich-text nodes="{{item.title}}" class="text-overflow-two" style="-webkit-line-clamp: 1;font-size:30rpx;line-height:1.5;color:#333333"></rich-text>
+                  <rich-text nodes="{{item.summary}}" class="text-overflow-two" style="-webkit-line-clamp: 4;color:#999999;font-size:26rpx;margin-top:10rpx;height:140rpx;"></rich-text>
                 </view>
                 <view class="align-item-center" style="height:120rpx;flex-wrap: wrap;">
-                  <view style="margin-right:20rpx">
+                  <navigator url='{{item.author.id?"/pages/userDescInfo/index?userId="+item.author.id:""}}' style="margin-right:20rpx">
                     <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
-                    <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
-                  </view>
+                    <text style="margin-left:8rpx;color:#999999;font-size:24rpx;{{item.author.id?'text-decoration: underline;':''}}">{{item.dutyName}}</text>
+                  </navigator>
                   <view style="margin-right:20rpx">
                     <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
                     <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>
@@ -90,7 +90,7 @@
             </navigator>
           </van-col>
         </van-row>
-    </view>
+    </scroll-view>
   </view>
 </view>
 

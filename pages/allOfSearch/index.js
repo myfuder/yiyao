@@ -56,10 +56,14 @@ Page({
       // ]},
     ],
     fx_data:[],
+    curpage:1,
+    isEnd:false
   },
   onChange: debounce(function(e){
     _self.setData({
       key: e.detail,
+      fx_data:[],
+      curpage:1,
     });
     _self.getList(1,true)
     // _self.getSomeDataFromServer()
@@ -68,7 +72,9 @@ Page({
     let item = e.currentTarget.dataset.item
     this.setData({
       typeActive:item.id,
-      currOption:item
+      currOption:item,
+      fx_data:[],
+      curpage:1,
     })
     this.getList(1)
     console.log(this.data.typeActive,this.data.currOption)
@@ -100,6 +106,8 @@ Page({
     })
     this.setData({
       currOption:{...this.data.currOption.currOption,screen:newOption},
+      fx_data:[],
+      curpage:1,
     })
     this.getList(1)
   },
@@ -122,9 +130,20 @@ Page({
       return {...item}
     })
     this.setData({
-      currOption:{...this.data.currOption.currOption,screen:newOption}
+      currOption:{...this.data.currOption.currOption,screen:newOption},
+      fx_data:[],
+      curpage:1,
     })
     this.getList(1)
+  },
+  scroll(e){
+    if(!this.data.isEnd){
+      this.setData({
+        curpage:this.data.curpage + 1
+      })
+      this.getList(this.data.curpage)
+    }
+    console.log(e)
   },
   /**
    * @param {*} pageNo 
@@ -170,9 +189,10 @@ Page({
         })
       }
       this.setData({
-        fx_data:resultVo.content.map((item)=>{
+        fx_data:this.data.fx_data.concat(resultVo.content.map((item)=>{
           return  {...item,content:item.content.replace(/[^\u4e00-\u9fa5]/gi,""),}
-        }),
+        })),
+        isEnd:this.data.curpage == resultVo.totalPages
       })
     })
   },

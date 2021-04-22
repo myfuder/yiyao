@@ -2,8 +2,9 @@
 
 <view style="background:#F4F8FB;height:100vh">
   <view class="flex-col-center align-item-center flex-center" style="padding:40rpx 0;background:{{color}}">
-    <image class="userinfo-avatar" src="https://xgyz.coolgua.com/icon/c2537.png" mode="cover"></image>
-    <text class="userinfo-nickname">你好</text>
+    <image bindtap="toPage" class="userinfo-avatar" src="{{basUrl+userInfo.avatar}}" mode="cover"></image>
+		<text class="userinfo-nickname">{{userInfo.username}}</text>
+		<navigator wx:if="{{!userInfo.openid}}" url="/pages/authorization/index" style="font-size:24rpx;color:#fff;background:#4CC497;margin-top:10rpx;padding:10rpx;border-radius: 26rpx;">去绑定微信></navigator>
   </view>
   <view class="user-menu" >
 			<view class="menuB" style="background:#fff">
@@ -43,7 +44,7 @@
 					<i class="iconfont icon-youjiantou" style="font-size:40rpx;color:#C3C3C3"></i>
 				</navigator>
       </view>
-      <button style="background:{{color}};border-radius:40rpx;margin-top:100rpx;color:#fff;font-size:34rpx;" bindtap="ttt">
+      <button style="background:{{color}};border-radius:40rpx;margin-top:100rpx;color:#fff;font-size:34rpx;" bindtap="logout">
         退出登录
       </button>
 		</view>

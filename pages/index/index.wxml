@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container" style="margin-bottom:130rpx">
+<view wx:if="{{loading}}" class="container" style="margin-bottom:130rpx">
   <navbar left="32rpx" navColor="{{scrollTop>90?color:''}}"  navTitle="{{navTitle}}" isWhite="false" ></navbar>
   <image src="../../common/faxianbg.jpg" style="background:{{color}};border-bottom-left-radius:70rpx;border-bottom-right-radius:70rpx;z-index:-1;width:100%;position:absolute;top:0;height:420rpx;width:100%;"></image>
   <view style="padding:0 30rpx;padding-top:{{navHeight}}px;">
@@ -60,13 +60,13 @@
       <navigator  url='/pages/details/detail1/index?id={{item.id}}&type={{item.type}}' wx:for="{{fx_data}}" class="" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
         <!-- <image mode="aspectFit" style="width:140rpx;height:140rpx;margin:0 30rpx;" src="{{item.fileUrl}}"></image> -->
         <view class="flex-col-center space-between " style="text-align:left;">
-          <text class="text-overflow-one" style="font-size:30rpx;font-weight:bold;color:#333333">{{item.title}}</text>
-          <text class="text-overflow-two" style="font-size:26rpx;margin-top:10rpx;margin-bottom:20rpx">{{item.content}}</text>
+          <rich-text class="text-overflow-one" style="font-size:30rpx;font-weight:bold;color:#333333" nodes="{{item.title}}"></rich-text>
+          <rich-text class="text-overflow-two" style="font-size:26rpx;margin-top:10rpx;margin-bottom:20rpx" nodes="{{item.summary}}"></rich-text>
           <view class="align-item-center" style="margin-top:20rpx;flex-wrap: wrap;">
-            <view style="margin-right:20rpx">
+            <navigator url='{{item.author.id?"/pages/userDescInfo/index?userId="+item.author.id:""}}' catchtap style="margin-right:20rpx">
               <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
-              <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
-            </view>
+              <text style="margin-left:8rpx;color:#999999;font-size:24rpx;{{item.author.id?'text-decoration: underline;':''}}">{{item.dutyName}}</text>
+            </navigator>
             <view style="margin-right:20rpx">
               <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
               <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>
@@ -88,13 +88,13 @@
         <!-- <image mode="aspectFit" style="width:140rpx;height:140rpx;margin:0 30rpx;" src="{{item.fileUrl}}"></image> -->
         <van-tag style="position:absolute;right:0;top:-8rpx" color="{{color}}" type="primary">{{item.type}}</van-tag>
         <view class="flex-col-center space-between " style="text-align:left;">
-          <text class="text-overflow-one" style="font-size:30rpx;font-weight:bold;color:#333333">{{item.title}}</text>
-          <text class="text-overflow-two" style="font-size:26rpx;margin-top:10rpx;margin-bottom:20rpx">{{item.content}}</text>
+          <rich-text class="text-overflow-one" style="font-size:30rpx;font-weight:bold;color:#333333" nodes="{{item.title}}"></rich-text>
+          <rich-text class="text-overflow-two" style="font-size:26rpx;margin-top:10rpx;margin-bottom:20rpx" nodes="{{item.summary}}"></rich-text>
           <view class="align-item-center" style="margin-top:20rpx;flex-wrap: wrap;">
-            <view style="margin-right:20rpx">
+            <navigator url='{{item.author.id?"/pages/userDescInfo/index?userId="+item.author.id:""}}' catchtap style="margin-right:20rpx">
               <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
-              <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
-            </view>
+              <text style="margin-left:8rpx;color:#999999;font-size:24rpx;{{item.author.id?'text-decoration: underline;':''}}">{{item.dutyName}}</text>
+            </navigator>
             <view style="margin-right:20rpx">
               <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
               <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>

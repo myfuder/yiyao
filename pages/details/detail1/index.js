@@ -12,30 +12,61 @@ Page({
     detail:'',
     type:'',
     msg:'',
-    commentList:[]
+    answermasg:'',
+    commentList:[],
+    isFavor:false,
+    currUser:''
   },
   onChange:debounce((e)=>{
+    let name = e.currentTarget.dataset.name
     _self.setData({
-      msg:e.detail
+      [name]:e.detail
     })
   }),
-  sendComment(){
-    ajax.get(`/api/comment/submit?toId=${this.data.detail.id}&text=${this.data.msg}`).then((res)=>{
+  onFavor(){
+    ajax.get(`/api/user/favor?id=${this.data.detail.id}`).then((res)=>{
       if(res.code == 0){
-        this.getCommentList()
-      }else{
-        wx.showToast({
-          icon:'none',
-          title: res.message,
+        this.setData({
+          isFavor:true
         })
       }
-      _self.setData({
-        msg:''
+      wx.showToast({
+        icon:'none',
+        title: res.message,
       })
     })
   },
+  answer(e){
+    this.setData({
+      currUser:e.currentTarget.dataset.user
+    })
+  },
+  sendMessage(e){
+    console.log(this.data.answermasg)
+    this.send(this.data.answermasg)
+    this.setData({
+      currUser:'',
+    })
+  },
+  send(msg){
+    ajax.post(`/api/comment/submit?toId=${this.data.detail.id}&text=${msg||this.data.msg}&pid=${this.data.currUser.id}`).then((res)=>{
+      if(res.code == 0){
+        this.getCommentList()
+      }
+      wx.showToast({
+        icon:'none',
+        title: res.message,
+      })
+      _self.setData({
+        msg:'',
+      })
+    })
+  },
+  sendComment(){
+    this.send()
+  },
   getCommentList(){
-    ajax.get(`/api/comment/list?postId=${this.data.detail.id}`).then((res)=>{
+    ajax.get(`/api/comment/list?postId=${this.data.detail.id}`,{},(res)=>{
       this.setData({
         commentList:res.content
       })
@@ -46,7 +77,8 @@ Page({
     ajax.get(`/api/find/detail?id=${id}&type=${type}`).then((res)=>{
       this.setData({
         detail:res.data.detail,
-        joinuser:res.data.joinuser
+        joinuser:res.data.joinuser,
+        isFavor:res.data.detail.favors
       })
       this.getCommentList()
     })
@@ -66,6 +98,9 @@ Page({
     wx.setNavigationBarColor({
       backgroundColor: wx.getStorageSync('color'),
       frontColor: '#ffffff',
+    })
+    wx.setNavigationBarTitle({
+      title: "文章详情",
     })
     this.getDetailInfo(options.id,options.type)
   },
@@ -117,5 +152,12 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onPageScroll(){
+    if(this.data.currUser){
+      this.setData({
+        currUser:'',
+      })
+    }
   }
 })

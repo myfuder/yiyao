@@ -22,22 +22,22 @@
       <view style="padding:0 30rpx">
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">姓名</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="username" value="{{ username }}"  placeholder="请输入姓名" data-tt="dasds" bindinput="das" bind:click-icon="onClickIcon"/>
+          <van-field disabled name="username" value="{{ params.username }}"  placeholder="请输入姓名" data-name="username" bindinput="onChangeInput" />
         </view>
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">性别</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-radio-group name="gender" style="display: flex;" value="{{ radio }}" direction="horizontal" bind:change="onChange">
-            <van-radio checked-color="{{color}}" style="margin-left:40rpx" name="1">男</van-radio>
-            <van-radio checked-color="{{color}}" style="margin-left:40rpx" name="2">女</van-radio>
+          <van-radio-group name="gender" disabled  style="display: flex;" value="{{ params.sex }}" direction="horizontal" bind:change="onChangeRadio">
+            <van-radio checked-color="{{color}}" style="margin-left:40rpx" name="男">男</van-radio>
+            <van-radio checked-color="{{color}}" style="margin-left:40rpx" name="女">女</van-radio>
           </van-radio-group>      
         </view>
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">出生日期</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="borth" value="{{ date }}" readonly bindtap="onDisplay" placeholder="请选择出生年月日"/>
+          <van-field disabled name="borth" value="{{ params.birthday }}" readonly bindtap="onDisplay" placeholder="请选择出生年月日"/>
           <van-popup show="{{ show }}" position="bottom" bind:close="onClose">
             <van-datetime-picker
               type="date"
-              value="{{ currentDate }}"
+              value="{{ maxDate }}"
               min-date="{{ minDate }}"
               max-date="{{ maxDate }}"
                bind:cancel="onCancle"
@@ -47,20 +47,20 @@
         </view>
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">联系电话</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="mobilephone" value="{{ username }}"  placeholder="请输入电话" bind:click-icon="onClickIcon"/>
+          <van-field disabled name="tel" value="{{ params.tel }}"  placeholder="请输入电话" data-name="tel" bindinput="onChangeInput"/>
         </view>
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">邮箱地址</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="email" value="{{ username }}"  placeholder="请输入邮箱" bind:click-icon="onClickIcon"/>
+          <van-field name="email" value="{{ params.email }}"  placeholder="请输入邮箱" data-name="email" bindinput="onChangeInput"/>
         </view>
       </view>
       <text style="font-weight:bold;font-size:30rpx;">教育信息</text>
       <view style="padding:0 30rpx">
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">毕业院校</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="school" value="{{ username }}"  placeholder="请输入毕业院校" bind:click-icon="onClickIcon"/>
+          <van-field disabled name="graduateSchool" value="{{ params.graduateSchool }}"  placeholder="请输入毕业院校" data-name="graduateSchool" bindinput="onChangeInput"/>
         </view>
-        <view class="form_item align-item-center">
+        <!-- <view class="form_item align-item-center">
           <text style="font-size:26rpx;">毕业时间</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
           <van-field name="graduation" value="{{ date }}" readonly bindtap="onDisplay" placeholder="请选择毕业时间"/>
           <van-popup show="{{ show }}" position="bottom" bind:close="onClose">
@@ -72,50 +72,57 @@
               bind:cancel="onCancle"
               bind:confirm="onConfirm"/>
           </van-popup>
-        </view>
+        </view> -->
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">专业名称</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="major" value="{{ username }}"  placeholder="请输入专业名称" bind:click-icon="onClickIcon"/>
+          <van-field disabled name="major" value="{{ params.major }}"  placeholder="请输入专业名称" data-name="graduateSchool" bindinput="onChangeInput"/>
         </view>
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">学历</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="education" value="{{ username }}"  placeholder="请输入学历" bind:click-icon="onClickIcon"/>
+          <van-field disabled name="education" value="{{ params.education }}"  placeholder="请输入学历" data-name="graduateSchool" bindinput="onChangeInput"/>
         </view>
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">学位</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="degree" value="{{ username }}"  placeholder="请输入学位" bind:click-icon="onClickIcon"/>
+          <van-field disabled name="academicDegree" value="{{ params.academicDegree }}"  placeholder="请输入学位" data-name="academicDegree" bindinput="onChangeInput"/>
         </view>
       </view>
       <text style="font-weight:bold;font-size:30rpx;">职业信息</text>
       <view style="padding:0 30rpx">
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">科室</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="department" value="{{ username }}"  placeholder="请输入科室" bind:click-icon="onClickIcon"/>
+          <van-field disabled name="department" value="{{ params.department }}"  placeholder="请输入科室" data-name="department" bindinput="onChangeInput"/>
         </view>
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">入职时间</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="entry" value="{{ date }}" readonly bindtap="onDisplay" placeholder="请选择入职时间"/>
-          <van-popup show="{{ show }}" position="bottom" bind:close="onClose">
+          <van-field disabled name="entry" value="{{ params.joinTime }}" readonly bindtap="onDisplay1" placeholder="请选择入职时间"/>
+          <van-popup show="{{ show1 }}" position="bottom" bind:close="onClose1">
             <van-datetime-picker
               type="date"
-              value="{{ currentDate }}"
+              value="{{ maxDate }}"
               min-date="{{ minDate }}"
               max-date="{{ maxDate }}"
-              bind:cancel="onCancle"
-              bind:confirm="onConfirm"/>
+              bind:cancel="onCancle1"
+              bind:confirm="onConfirm1"/>
           </van-popup>
         </view>
         <view class="form_item align-item-center">
           <text style="font-size:26rpx;">职称</text><i style="color:#ee0a24;font-size: 28rpx">*</i>
-          <van-field name="title" value="{{ username }}"  placeholder="请输入职称" bind:click-icon="onClickIcon"/>
+          <van-field disabled name="technicalTitle" value="{{ params.technicalTitle }}"  placeholder="请输入职称" data-name="technicalTitle" bindinput="onChangeInput"/>
         </view>
       </view>
-      <text style="font-weight:bold;font-size:30rpx;">我的兴趣</text>
+      <text style="font-weight:bold;font-size:30rpx;">我的兴趣(中文)</text>
       <view style="padding:30rpx">
-        <van-tag wx:for="{{tags}}" style="margin-right:20rpx" color="{{color}}" closeable size="medium" type="primary" id="primary" bind:close="onTagClose">
+        <van-tag wx:for="{{tags}}" style="margin-right:20rpx" color="{{color}}" data-key="{{item}}" closeable size="medium" type="primary" bind:close="onTagClose">
           {{item}}
         </van-tag>
         <van-field name="tags" value="{{ tagValue }}"  placeholder="请输入自定义标签" bind:blur="onBlurTags"></van-field>
+      </view>
+      <text style="font-weight:bold;font-size:30rpx;">我的兴趣(英文)</text>
+      <view style="padding:30rpx">
+        <van-tag wx:for="{{tagsEn}}" style="margin-right:20rpx" color="{{color}}" data-key="{{item}}" closeable size="medium" type="primary" bind:close="onTagCloseEn">
+          {{item}}
+        </van-tag>
+        <van-field name="tags" value="{{ tagValueEn }}"  placeholder="请输入自定义标签" bind:blur="onBlurTagsEn"></van-field>
       </view>
     </view>
     <view style="padding:30rpx">

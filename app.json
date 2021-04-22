@@ -19,7 +19,12 @@
     "pages/mine/kysc/index",
     "pages/mine/tongz/index",
     "pages/details/detail1/index",
-    "pages/service/kgfw/detail/index"
+    "pages/service/kgfw/detail/index",
+    "pages/userDescInfo/index",
+    "pages/mine/mykgfw/editfw/index",
+    "pages/mine/demind/editDetail/index",
+    "pages/login/index",
+    "pages/authorization/index"
   ],
   "usingComponents": {
     "van-row": "@vant/weapp/row",

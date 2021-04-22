@@ -1,0 +1,9 @@
+/* pages/login/index.wxss */
+page{
+  height:100%;
+}
+.van-cell__title{
+  min-width: unset !important;
+  width:40px !important;
+  flex:none !important
+}

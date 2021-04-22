@@ -1,6 +1,7 @@
 <!--富文本-->
 <view hidden="{{detail == ''}}" >
-  <button class="flex-center align-item-center" style="position: fixed;z-index: 1000;bottom:140rpx;right:60rpx;padding:0;width:100rpx;height:100rpx;font-size:26rpx;border-radius:50%;color:{{color}};border:1px solid {{color}}">收藏</button>
+  <button wx:if="{{!isFavor}}" class="flex-center align-item-center" style="position: fixed;z-index: 1000;bottom:140rpx;right:60rpx;padding:0;width:100rpx;height:100rpx;font-size:26rpx;border-radius:50%;color:{{color}};border:1px solid {{color}}" bindtap="onFavor">收藏</button>
+  <button wx:else class="flex-center align-item-center" style="position: fixed;z-index: 1000;bottom:140rpx;right:60rpx;padding:0;width:100rpx;height:100rpx;font-size:26rpx;border-radius:50%;background:{{color}};color:#fff;border:1px solid {{color}}" bindtap="onFavor">已收藏</button>
   <view style="padding:0 40rpx;">
     <view wx:if="{{type == '科技论文'}}" class="wxParse" style="color:666666;font-size:28rpx">
     <text>Format: abstract</text>
@@ -13,12 +14,12 @@
     </view>
   </view>
   <view>
-    <text wx:for="{{joinuser}}" style="font-size:28rpx;">
-      <text style="font-weight:bold">{{item.name}}</text>[{{item.department}}-{{item.role}}]
-    </text>
+    <view wx:for="{{joinuser}}" style="font-size:28rpx;display:inline-block;">
+      <navigator url='{{item.employeenum?"/pages/userDescInfo/index?userId="+item.employeenum:""}}' style="display:inline-block;font-weight:bold;{{item.employeenum?'text-decoration: underline;':''}}">{{item.name}}</navigator>[{{item.department}}-{{item.role}}]
+    </view>
   </view> 
   <view style="margin-top:40rpx;font-size:30rpx">
-    <mp-html wx:if="{{detail.detail}}" content="{{detail.detail}}" />
+    <mp-html wx:if="{{detail.summary}}" content="{{detail.summary}}" />
     <text wx:else>暂未获得摘要</text>
   </view>
   </view>
@@ -28,24 +29,34 @@
       value="{{ msg }}"
       maxlength="200"
       placeholder="我有话说~~"
+      data-name="msg"
       border="{{ false }}"
-      bind:change="onChange"
+      bindinput="onChange"
       custom-style="margin-top:20rpx;"
       style="--field-input-text-color:#666666;--field-text-area-min-height:200rpx;--cell-vertical-padding:0rpx;--cell-horizontal-padding:40rpx">
     </van-field>
     <view style="text-align:start;margin-bottom:20rpx">
       <van-button bind:click="sendComment" type="primary" size="small" style="margin-left:40rpx" color="{{color}}">发布</van-button>
     </view>
-    <view wx:for="{{commentList}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
-      <van-image width="100rpx" height="100rpx;" fit="scale-down" src="{{basUrl+item.author.avatar}}">
-      </van-image>
-      <view class="flex-col-center " style="text-align:left;width:calc(100% - 100rpx);margin-left:20rpx">
-        <view class="space-between">
-          <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:{{color}}">{{item.author.username}}</text>
-          <text style='color:#999999;font-size:24rpx'>{{item.created}}</text>
+    <view wx:for="{{commentList}}" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
+      <view class="flex-center" >
+        <van-image width="100rpx" height="100rpx;" fit="scale-down" src="{{basUrl+item.author.avatar}}">
+        </van-image>
+        <view class="flex-col-center " style="text-align:left;width:calc(100% - 100rpx);margin-left:20rpx">
+          <view class="space-between">
+            <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:{{color}}" data-user="{{item}}" bindtap="answer">{{item.author.username}}</text>
+            <text style='color:#999999;font-size:24rpx'>{{item.created}}</text>
+          </view>
+          <text class="text-overflow-two" style="font-size:26rpx;coor:#333333;line-height: 1.5;margin-top: 10rpx;">{{item.content}}</text>
         </view>
-        <text class="text-overflow-two" style="font-size:26rpx;coor:#333333;line-height: 1.5;margin-top: 10rpx;">{{item.content}}</text>
+      </view>
+      <view wx:if="{{item.parent}}" style="font-size:26rpx;display:flex;margin-left: 120rpx;background: #eeeeee;padding: 20rpx;">
+        @<text style="color:#4CC497">{{item.parent.author.username}}:</text>
+        <view style="margin-left:10rpx;width:calc(100% - 90rpx - 120rpx);coor:#333333;line-height: 1.5;">{{item.parent.content}}</view>
       </view>
     </view>
   </view>
+  <van-field wx:if="{{currUser}}" use-button-slot maxlength="200" auto-focus data-name="answermasg" placeholder="回复{{currUser.author.username}}:" border="{{ false }}" custom-style="margin-top:20rpx;position:fixed;bottom:0" bindinput="onChange">
+    <van-button slot="button" size="small" bind:click="sendMessage" type="primary"> 发送  </van-button>
+  </van-field>
 </view>

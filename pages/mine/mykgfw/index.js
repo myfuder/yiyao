@@ -1,47 +1,57 @@
 // pages/mine/mykgfw/index.js
+import {ajax,debounce} from '../../../utils/util'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    list:[]
   },
-  edit(){
-    wx.showToast({
-      title: '点击了编辑',
+  edit(e){
+    let {name,id} = e.currentTarget.dataset
+    this.selectComponent(name).close();
+    wx.navigateTo({
+      url: '/pages/mine/mykgfw/editfw/index?id='+id,
     })
   },
   delete(e){
-    let id = e.currentTarget.dataset.name
+    let id = e.currentTarget.dataset.id
     let that = this
     wx.showModal({
       content: '确定删除吗？',
       success (res) {
         if (res.confirm) {
-          that.selectComponent(id).close();
+          // that.selectComponent(id).close();
+          // /api/kjfw/del
+          ajax.get(`/api/kjfw/del?id=${id}`).then((res)=>{
+            that.getList()
+            wx.showToast({
+              icon:'none',
+              title: res.message,
+            })
+          })
         }
       }
+    })
+  },
+  toEditPage(e){
+    wx.navigateTo({
+      url: '/pages/mine/mykgfw/editfw/index',
+    })
+  },
+  // /api/user/kjfw\
+  getList(){
+    ajax.get(`/api/user/kjfw?userid=${wx.getStorageSync('userInfo').id}`).then((res)=>{
+      this.setData({
+        list:res.data.content
+      })
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
     this.setData({
       color:wx.getStorageSync('color')
     })
@@ -49,6 +59,19 @@ Page({
       backgroundColor: wx.getStorageSync('color'),
       frontColor: '#ffffff',
     })
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.getList()
   },
 
   /**

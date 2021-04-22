@@ -1,0 +1,80 @@
+<!--pages/mine/mykgfw/editfw/index.wxml-->
+
+<view>
+  <form bindsubmit="formsubmit">
+    <view  style="">
+      <view style="padding:0 30rpx">
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">类型</text>
+          <van-radio-group name="type" style="display: flex;" value="{{ params.type }}" direction="horizontal" data-name="type" bind:change="onChangeRadio">
+            <van-radio style="--padding-sm:0;--radio-label-margin:4rpx" checked-color="{{color}}" style="margin-left:40rpx" name="会务申请">会务申请</van-radio>
+            <van-radio style="--padding-sm:0;--radio-label-margin:4rpx" checked-color="{{color}}" style="margin-left:40rpx" name="洽谈服务">洽谈服务</van-radio>
+          </van-radio-group>      
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">标题</text>
+          <van-field name="username" value="{{ params.title }}"  placeholder="请输入标题" data-name="title" bindinput="onChangeInput" />
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">领域</text>
+          <van-radio-group name="styField" style="display: flex;" value="{{ params.styField }}" direction="horizontal" data-name="styField" bind:change="onChangeRadio">
+            <van-radio checked-color="{{color}}" style="margin-left:40rpx" name="临床研究">临床研究</van-radio>
+            <van-radio checked-color="{{color}}" style="margin-left:40rpx" name="基础研究">基础研究</van-radio>
+            <van-radio checked-color="{{color}}" style="margin-left:40rpx" name="工科研究">工科研究</van-radio>
+          </van-radio-group>      
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">预计参会人数</text>
+          <van-field name="joinNum" value="{{ params.joinNum }}"  placeholder="请输入人数" data-name="joinNum" bindinput="onChangeInput" />
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">召开地点</text>
+          <van-field name="address" value="{{ params.address }}"  placeholder="请输入地址" data-name="address" bindinput="onChangeInput" />
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title" style="font-size:26rpx;">其他</text>
+          <van-field name="addressQt" value="{{ params.addressQt }}"  placeholder="" data-name="addressQt" bindinput="onChangeInput" />
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">开始时间</text>
+          <van-field name="reqStartTime" value="{{ params.reqStartTime }}" readonly bindtap="onDisplay" placeholder="请选择开始时间"/>
+          <van-popup show="{{ show }}" position="bottom" bind:close="onClose">
+            <van-datetime-picker
+              type="datetime"
+              value="{{ maxDate }}"
+              min-date="{{ minDate }}"
+              max-date="{{ maxDate }}"
+               bind:cancel="onCancle"
+               bind:close="onClose"
+              bind:confirm="onConfirm"/>
+          </van-popup>
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">结束时间</text>
+          <van-field name="borth" value="{{ params.reqEndTime }}" readonly bindtap="onDisplay1" placeholder="请选择结束时间"/>
+          <van-popup show="{{ show1 }}" position="bottom" bind:close="onClose1">
+            <van-datetime-picker
+              type="datetime"
+              value="{{ maxDate }}"
+              min-date="{{ minDate }}"
+              max-date="{{ maxDate }}"
+               bind:cancel="onCancle1"
+               bind:close="onClose1"
+              bind:confirm="onConfirm1"/>
+          </van-popup>
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title" style="font-size:26rpx;">会务支持</text>
+          <van-field name="needSuporrt" value="{{ params.needSuporrt }}"  placeholder="请输入会务支持,如ppt幻灯，话筒，录音笔等" data-name="needSuporrt" bindinput="onChangeInput" />
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">申请内容</text>
+          <van-field name="content" value="{{ params.content }}"  placeholder="请输入申请内容" data-name="content" bindinput="onChangeInput" />
+        </view>
+      </view>
+    </view>
+    <view style="padding:30rpx">
+      <van-button round block color="{{color}}" type="info" form-type="submit">提交</van-button>
+    </view>
+  </form >
+</view>

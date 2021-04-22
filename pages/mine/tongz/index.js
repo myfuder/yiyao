@@ -1,28 +1,52 @@
 // pages/mine/tongz/index.js
+import {ajax,basUrl} from '../../../utils/util'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:[
-      {id:'',title:'科技部',content:'一个未读消息',datetime:'2021-03-03 11:11'},
-      {id:'',title:'科技部',content:'一个未读消息',datetime:'2021-03-03 11:11'},
-      {id:'',title:'系统消息',content:'一个未读消息',datetime:'2021-03-03 11:11'},
-      {id:'',title:'科技部',content:'一个未读消息',datetime:'2021-03-03 11:11'},
-      {id:'',title:'预约提醒',content:'一个未读消息',datetime:'2021-03-03 11:11'},
-      {id:'',title:'科技部',content:'一个未读消息',datetime:'2021-03-03 11:11'},
-      {id:'',title:'科技部',content:'一个未读消息',datetime:'2021-03-03 11:11'},
-      {id:'',title:'版本更新',content:'一个未读消息',datetime:'2021-03-03 11:11'},
-      {id:'',title:'科技部',content:'一个未读消息',datetime:'2021-03-03 11:11'}
-    ]
+    basUrl,
+    tabs:[{title:'系统通知',name:'xt'}, {title:'科技部通知',name:'kjb'}],
+    active:'xt',
+    list:[],
+    kjbList:[]
   },
-
+  onChange(e){
+    this.setData({
+      active:e.detail.name
+    })
+  },
+  // /api/user/mymessage
+  formatDate(date) {
+    date = new Date(date);
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
+  },
+  getKJBMessage(){
+    // /api/kjb/message
+    ajax.get(`/api/kjb/message`).then((res)=>{
+      this.setData({
+        kjbList:res.data.content.map((item)=>{
+          return {...item,created:this.formatDate(item.created)}
+        })
+      })
+    })
+  },
+  getList(){
+    ajax.get(`/api/user/mymessage`).then((res)=>{
+      this.setData({
+        list:res.data.content.map((item)=>{
+          return {...item,created:this.formatDate(item.created)}
+        })
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getList()
+    this.getKJBMessage()
   },
 
   /**

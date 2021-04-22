@@ -67,11 +67,24 @@ Component({
    */
   data: {
     navHeight: 0,
-    navTitleTop: 0
+    navTitleTop: 0,
+    isHome:true,
+    isBack:false
   },
   attached() {
     // 在组件实例进入页面节点树时执行
     // 获取顶部导航高度
+    let pages = getCurrentPages();
+    if(pages[pages.length-1].__route__ == 'pages/index/index'){
+      this.setData({
+        isHome:true
+      })
+    }else{
+      this.setData({
+        isHome:false,
+        isBack:pages.length > 1
+      })
+    }
     this.setData({
       navHeight: app.globalData.navHeight,
       navTitleTop: app.globalData.navTitleTop
@@ -83,7 +96,7 @@ Component({
   methods: {
     // 回到首页
     navHome:function(){
-      wx.switchTab({
+      wx.reLaunch({
         url: '/pages/index/index'
       })
     },
@@ -97,16 +110,17 @@ Component({
     },
     // 返回上一页
     navBack: function () {
-      if (this.properties.backPath === '') {
-        wx.navigateBack({
-          delta: this.properties.backDelta
-        })
-      } else {
-        wx.redirectTo({
-          url: this.properties.backPath
-        })
-      }
-      this.triggerEvent('backEvent', {}) // 可绑定点击返回时的事件
+      wx.navigateBack()
+      // if (this.properties.backPath === '') {
+      //   wx.navigateBack({
+      //     delta: this.properties.backDelta
+      //   })
+      // } else {
+      //   wx.redirectTo({
+      //     url: this.properties.backPath
+      //   })
+      // }
+      // this.triggerEvent('backEvent', {}) // 可绑定点击返回时的事件
     }
   }
 })

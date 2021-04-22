@@ -33,7 +33,7 @@
     </view>
     <view class="fx-right">
       <navigator wx:if="{{direction==0}}" url='/pages/details/detail1/index?id={{item.myid}}&type=科技服务' wx:for="{{pt_data}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
-        <van-image width="180rpx" height="150rpx;" fit="scale-down" src="https://img.yzcdn.cn/vant/cat.jpeg">
+        <van-image width="180rpx" height="150rpx;" fit="scale-down" src="{{basUrl+'/dist/images/kyjd/no6.png'}}">
           <!-- <text slot="error">加载失败</text> -->
         </van-image>
         <view class="flex-col-center space-between " style="text-align:left;width:calc(100% - 180rpx);margin-left:20rpx">

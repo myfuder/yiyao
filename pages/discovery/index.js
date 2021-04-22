@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoadding:false,
     typeActive:'全部',
     direction:0,  //0列表 1方格
     showPopup:false,
@@ -56,10 +57,14 @@ Page({
       // ]},
     ],
     fx_data:[],
+    curpage:1,
+    isEnd:false
   },
   onChange: debounce(function(e){
     _self.setData({
       key: e.detail,
+      fx_data:[],
+      curpage:1,
     });
     _self.getList(1,true)
     // _self.getSomeDataFromServer()
@@ -68,7 +73,9 @@ Page({
     let item = e.currentTarget.dataset.item
     this.setData({
       typeActive:item.id,
-      currOption:item
+      currOption:item,
+      fx_data:[],
+      curpage:1,
     })
     this.getList(1)
     console.log(this.data.typeActive,this.data.currOption)
@@ -100,6 +107,8 @@ Page({
     })
     this.setData({
       currOption:{...this.data.currOption.currOption,screen:newOption},
+      fx_data:[],
+      curpage:1,
     })
     this.getList(1)
   },
@@ -122,9 +131,20 @@ Page({
       return {...item}
     })
     this.setData({
-      currOption:{...this.data.currOption.currOption,screen:newOption}
+      currOption:{...this.data.currOption.currOption,screen:newOption},
+      fx_data:[],
+      curpage:1,
     })
     this.getList(1)
+  },
+  scroll(e){
+    if(!this.data.isEnd){
+      this.setData({
+        curpage:this.data.curpage + 1
+      })
+      this.getList(this.data.curpage)
+    }
+    console.log(e)
   },
   /**
    * @param {*} pageNo 
@@ -134,11 +154,19 @@ Page({
     let taginfo = []
     if( this.data.currOption.screen){
       this.data.currOption.screen.map((item)=>{
-        item.data.map((itemc)=>{
-          if(itemc.active){
-            taginfo.push(item.id+":"+itemc.id)
+        let info = ''
+        if(item.active){
+          info += item.id
+          if(item.data.lenth>0){
+            item.data.map((itemc)=>{
+              if(itemc.active){
+                taginfo.push(info+`:${itemc.id}`)
+              }
+            })
+          }else{
+            taginfo.push(info)
           }
-        })
+        }
       })
     }
     ajax.get(`/api/find/search?pageNo=${pageNo}&pageSize=100&range=发现&type=${this.data.typeActive}&taginfo=${taginfo.join("@")}&kw=${this.data.key}`).then((res)=>{
@@ -170,10 +198,13 @@ Page({
         })
       }
       this.setData({
-        fx_data:resultVo.content.map((item)=>{
+        fx_data:this.data.fx_data.concat(resultVo.content.map((item)=>{
           return  {...item,content:item.content.replace(/[^\u4e00-\u9fa5]/gi,""),}
-        }),
+        })),
+        isEnd:this.data.curpage == resultVo.totalPages,
+        isLoadding:true
       })
+      
     })
   },
   /**

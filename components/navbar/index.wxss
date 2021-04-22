@@ -1,4 +1,6 @@
 /* components/navbar/index.wxss *//* navbar.wxss */
+@import '/common/common.wxss';
+@import '/common/iconfont.wxss';
 /*自定义导航栏*/
 .nav-bar {
   position: fixed;

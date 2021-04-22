@@ -1,20 +1,7 @@
 <!--navbar.wxml-->
-<view>
-  <view class="nav-bar {{isWhite=='true'?'nav-bar-white':''}}" style="height: {{navHeight}}px;background-color:{{navColor}};" catchtap="toTop">
-    <image wx:if="{{logo}}" src="{{logo}}" mode="aspectFit" style="height: 32px;width:auto"></image>
-    <text class="navbar-title" style="top:{{navTitleTop}}px;text-align:left;left:{{left}};color:{{navTitleColor}};">{{navTitle}}</text>
-    <view wx:if="{{noArrow=='false'&&isArrowWhite=='false'&&isNavHome=='false'}}" catchtap="navBack" class="navbar-icon-wrap" style="top:{{navTitleTop}}px;">
-      <image class="navbar-icon" src="../../images/arrow_left.png"></image>
-    </view>
-    <view wx:if="{{isArrowWhite=='true'&&isNavHome=='false'&&noArrow=='false'}}"  catchtap="navBack" class="navbar-icon-wrap" style="top:{{navTitleTop}}px;">
-      <image src="../../images/arrow_left_white.png" class="navbar-icon"></image>
-    </view>
-    <view wx:if="{{isNavHome=='true'&&isArrowWhite=='false'&&noArrow=='false'}}" catchtap="navHome" class="navbar-icon-wrap" style="top:{{navTitleTop}}px;">
-      <image src="../../images/Home@3x.png" class="navbar-icon"></image>
-    </view>
-    <view wx:if="{{isNavHome=='true'&&isArrowWhite=='true'&&noArrow=='false'}}"  catchtap="navHome" class="navbar-icon-wrap" style="top:{{navTitleTop}}px;">
-      <image src="../../images/Home@3x_white.png" class="navbar-icon"></image>
-    </view>
+  <view style="position:fixed;top:0;z-index:1000;width:100%;height: {{navHeight}}px;background-color:{{navColor}};" catchtap="toTop">
+    <i wx:if="{{isHome}}"></i>
+    <i wx:elif="{{!isHome&&isBack}}" class="iconfont icon-fanhui" bindtap="navBack" style="margin-left:40rpx;font-size:34rpx;color:{{navTitleColor}}"></i>
+    <i wx:else class="iconfont icon-huaban33" bindtap="navHome" style="margin-left:40rpx;font-size:34rpx;color:{{navTitleColor}}"></i>
+    <text style="display: inline-block;margin-top:{{navTitleTop}}px;margin-left:40rpx;color:{{navTitleColor}};">{{navTitle}}</text>
   </view>
-  <view wx:if="{{isWhite=='true'}}" class="nav-bar-place" style="height: {{navHeight}}px;background-color:{{navColor}};"></view>
-</view>

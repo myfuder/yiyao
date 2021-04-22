@@ -1,8 +1,7 @@
 <!--pages/service/kgfw/index.wxml-->
 
 <view>
-  <!-- thumb-mode="scaleToFill" -->
-  <van-card wx:for="{{kg_data}}"
+  <van-card wx:for="{{kg_data}}" wx:key="{{index}}"
   style="--card-title-line-height:2"
   custom-class="custom-class"
     title-class="text-overflow-one custom-title"

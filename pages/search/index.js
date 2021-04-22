@@ -1,5 +1,5 @@
 // pages/search/index.js
-import {debounce} from '../../utils/util'
+import {ajax,debounce} from '../../utils/util'
 let _self
 Page({
 
@@ -21,9 +21,7 @@ Page({
     tuij:[
       {name:'基因'}, {name:'lung cancer'}, {name:'cancer'}
     ],
-    hots:[
-      {name:'ewrwe'}, {name:'ewrweefdsfsfsf'}, {name:'ewrwedas'}, {name:'ewrwedasdasda'}, {name:'ewrweadadadadasdadadasda'}, {name:'ewrwedasda'}, {name:'ewrwe'}
-    ],
+    hots:[],
   },
   onChangeType(e){
     let item = e.currentTarget.dataset.item
@@ -73,6 +71,14 @@ Page({
     });
     console.log( this.data.value)
   },
+  // /api/wordcloud
+  getWordCloud(){
+    ajax.get(`/api/wordcloud`).then((res)=>{
+      this.setData({
+        hots:Object.keys(res.data)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -81,6 +87,7 @@ Page({
     this.setData({
       searchvalue:options.path||_self.data.option[0].value
     })
+    this.getWordCloud()
   },
 
   /**

@@ -1,5 +1,5 @@
 // pages/mine/index.js
-import {ajax,debounce} from '../../utils/util'
+import {ajax,basUrl} from '../../utils/util'
 const app = getApp()
 Page({
 
@@ -7,22 +7,48 @@ Page({
    * 页面的初始数据
    */
   data: {
-    checked:true
+    basUrl,
+    checked:true,
+    userInfo:''
   },
 
-  ttt(){
-    
+  toPage(){
+    wx.navigateTo({
+      url: '/pages/userDescInfo/index?userId='+wx.getStorageSync('userInfo').id,
+    })
+  },
+  logout(){
+    wx.showModal({
+      content: '确定注销登录吗？',
+      success (res) {
+        if (res.confirm) {
+          wx.clearStorageSync()
+          wx.redirectTo({
+            url: '/pages/login/index',
+          })
+        }
+      }
+    })
+   
   },
   getUserInfo(){
-    ajax.get(`/api/user/profile`).then((item)=>{
-      debugger
-    })
+    // ajax.get(`/api/user/profile`).then((item)=>{
+    //   debugger
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.getUserInfo()
+    app.setTabBar()
+    this.setData({
+      color:wx.getStorageSync('color')
+    })
+    wx.setNavigationBarColor({
+      backgroundColor: wx.getStorageSync('color'),
+      frontColor: '#ffffff',
+    })
   },
 
   /**
@@ -36,14 +62,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.setTabBar()
+    let userInfo = wx.getStorageSync('userInfo')
     this.setData({
-      color:wx.getStorageSync('color')
+      userInfo
     })
-    wx.setNavigationBarColor({
-      backgroundColor: wx.getStorageSync('color'),
-      frontColor: '#ffffff',
-    })
+    
   },
 
   /**

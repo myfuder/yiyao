@@ -7,7 +7,7 @@
     </view>
   </view>
   <view style="padding:40rpx 0;font-size:30rpx">
-    <mp-html wx:if="{{detail.detail}}" content="{{detail.detail}}" />
+    <mp-html wx:if="{{detail.content}}" content="{{detail.content}}" />
     <text wx:else>暂未获得摘要</text>
   </view>
 </view>

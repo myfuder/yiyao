@@ -1,29 +1,58 @@
 // pages/mine/info/index.js
-import {ajax,debounce} from '../../../utils/util'
+import {ajax,debounce,basUrl} from '../../../utils/util'
 let _self;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    username:'',
+    params:{
+      username:'',
+      sex:'',
+      birthday:'',
+      tel:'',
+      email:'',
+      graduateSchool:'',
+      major:'',
+      education:'',
+      academicDegree:'',
+      department:'',
+      joinTime:'',
+      technicalTitle:''
+    },
+    
     password:'',
     show:false,
+    show1:false,
     date:'',
     maxDate: new Date().getTime(),
     currentDate: new Date().getTime(),
     minDate: new Date(1970, 1, 1).getTime(),
     headImage:'https://img.yzcdn.cn/vant/cat.jpeg',
     tags:[],
-    tagValue:''
+    tagsEn:[],
+    tagValue:'',
+    tagValueEn:'',
   },
-  onChange(event) {
+  onChangeInput:debounce(function(e){
+    let name = e.currentTarget.dataset.name
+    _self.setData({
+      params:{..._self.data.params,[name]:e.detail},
+    });
+  }),
+  onChangeRadio(event) {
     this.setData({
-      radio: event.detail,
+      params:{...this.data.params,sex:event.detail},
     });
   },
   formsubmit(e){
     console.log(e.detail.value)
+    ajax.post(`/api/user/like?like=${this.data.tags.join(',')}&likeen=${this.data.tagsEn.join(',')}&email=${this.data.params.email}`).then((res)=>{
+      wx.showToast({
+        icon:'none',
+        title: res.message,
+      })
+    })
   },
   onDisplay() {
     this.setData({ show: true });
@@ -39,51 +68,117 @@ Page({
     this.setData({ show: false });
   },
   onConfirm(event){
+    debugger
     this.setData({
-      date:this.formatDate(event.detail),
-      currentDate: event.detail,
+      params:{...this.data.params,birthday:this.formatDate(event.detail)},
       show: false
+    });
+  },
+  onDisplay1() {
+    this.setData({ show1: true });
+  },
+  onCancle1(){
+    this.setData({ show1: false });
+  },
+  onClose1(){
+    this.setData({ show1: false });
+  },
+  onConfirm1(event){
+    this.setData({
+      params:{...this.data.params,joinTime:this.formatDate(event.detail)},
+      show1: false
     });
   },
   onTagClose(event) {
     // this.setData({
     //   [`show.${event.target.id}`]: false,
     // });
+    let key = event.currentTarget.dataset.key
+    _self.setData({
+      tags:_self.data.tags.filter((item)=>{return item!=key}),
+      // params:{
+      //   ..._self.params,
+      //   mylike:
+      // },
+    })
+  },
+  onTagCloseEn(event){
+    let key = event.currentTarget.dataset.key
+    _self.setData({
+      tagsEn:_self.data.tagsEn.filter((item)=>{return item!=key})
+    })
   },
   afterRead(event) {
     console.log(event)
     const { file } = event.detail;
-    this.setData({
-      headImage: file.url
-    })
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+    wx.showLoading({
+      title: '正在上传',
+    })
     wx.uploadFile({
-      url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
+      url: basUrl+'/api/user/avatar', // 仅为示例，非真实的接口地址
       filePath: file.url,
       name: 'file',
-      formData: { user: 'test' },
-      success(res) {
-        // 上传完成需要更新 fileList
-        // const { fileList = [] } = this.data;
-        // fileList.push({ ...file, url: res.data });
-        // this.setData({ fileList });
+      header:{
+        'token':wx.getStorageSync('token'),
+        'X-Requested-With':'X-Requested-With'
       },
+      success:(res)=>{
+        if(res.statusCode == 200){
+          wx.showToast({
+            title: '上传成功',
+          })
+          let data = JSON.parse(res.data)
+          this.setData({
+            headImage: basUrl+'/'+data.path
+          })
+        }else{
+          wx.showToast({
+            title: '上传失败',
+          })
+        }
+      },
+      fail:()=>{
+        wx.showToast({
+          title: '上传失败'
+        })
+      }
     });
   },
   onBlurTags(e){
     let value = e.detail.value
-    _self.setData({
-      tagValue:'',
-      tags:[value].concat(_self.data.tags)
-    })
+    if(value){
+      _self.setData({
+        tagValue:'',
+        tags:[value].concat(_self.data.tags)
+      })
+    }
+  },
+  onBlurTagsEn(e){
+    let value = e.detail.value
+    if(value){
+      _self.setData({
+        tagValueEn:'',
+        tagsEn:[value].concat(_self.data.tagsEn)
+      })
+    }
   },
   getUserInfo(){
-    ajax.get(`/api/user/profile`).then((item)=>{
-      debugger
+    ajax.get(`/api/user/profile`).then((res)=>{
+      let mylike = res.data.mylike.split("|")
+      let tags = [],tagsEn = []
+      this.setData({
+        // this.formatDate(event.detail)
+        params:{
+          ...res.data,
+          joinTime:this.formatDate(res.data.joinTime),
+          birthday:this.formatDate(res.data.birthday),
+        },
+        headImage:basUrl+res.data.avatar,
+        tags:mylike[0]&&mylike[0].split(",")||[],
+        tagsEn:mylike[1]&&mylike[1].split(",")||[]
+      })
     })
-  },
-  das(e){
-    debugger
   },
   /**
    * 生命周期函数--监听页面加载

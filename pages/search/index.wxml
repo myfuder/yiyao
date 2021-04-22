@@ -70,7 +70,7 @@
       </card> -->
       <card title="热词">
         <view style="display: flex;justify-content: flex-start;flex-wrap: wrap;">
-          <text wx:for="{{hots}}" catchtap="onSearch" data-value="{{item.name}}" style="margin:10rpx 6rpx;padding:0 20rpx;border-radius:20rpx;font-size: 30rpx;line-height: 36rpx;height: 40rpx; background:#F4F8FB">{{item.name}}
+          <text wx:for="{{hots}}" catchtap="onSearch" data-value="{{item}}" style="margin:10rpx 6rpx;padding:0 20rpx;border-radius:20rpx;font-size: 30rpx;background:#F4F8FB">{{item}}
           </text>
         </view>
       </card>

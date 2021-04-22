@@ -1,0 +1,5 @@
+/* pages/userDescInfo/index.wxss */
+
+.van-tabs{
+  margin-top:28rpx;
+}

@@ -40,11 +40,10 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        ajax.post(`/api/login?id=10001&password=123456`).then((res)=>{
-          if(res.header&&res.header["Set-Cookie"]){
-            wx.setStorageSync('cookie', res.header["Set-Cookie"])
-          }
-        })
+        // ajax.post(`/api/login`,{id:'10001',password:'123456'}).then((res)=>{
+        //   wx.setStorageSync('token', res.data.token)
+        //   wx.setStorageSync('userInfo', res.data.profile)
+        // })
       }
     })
     // 获取用户信息

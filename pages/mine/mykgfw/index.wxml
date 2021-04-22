@@ -2,17 +2,23 @@
 
 <view>
   <view style="padding:20rpx;text-align:right">
-    <van-button icon="plus" size="small" type="primary">新建服务</van-button>
+    <van-button icon="plus" bind:click="toEditPage" size="small" type="primary">新建服务</van-button>
   </view>
-  <view wx:for="{{10}}" style="margin-top:10rpx;">
-    <van-swipe-cell  id="myswipe{{index}}" right-width="{{ 120 }}"async-close >
-      <van-cell-group>
-        <van-cell title="我的申请" style="--cell-background-color:#F4F8FB;--cell-vertical-padding:40rpx;--cell-horizontal-padding:40rpx"/>
-      </van-cell-group>
+  <view wx:for="{{list}}" style="margin-top:10rpx;">
+    <van-swipe-cell  id="myswipe{{index}}" right-width="{{ item.status == '申请中'?120:60 }}"async-close >
+      <navigator url="{{item.post?'/pages/details/detail1/index?id='+item.post.id+'&type='+item.post.type:''}}" class="flex-center" style="position:relative;background:#F4F8FB;padding:20rpx 30rpx;}}">
+        <van-tag style="position:absolute;right:0;top:-8rpx" color="{{color}}" type="primary">{{item.status}}</van-tag>
+        <view class="flex-col-center space-between " style="text-align:left;width:100%;height:110rpx">
+          <text style="font-size: 14px;">{{item.title}}</text>
+          <view wx:if="{{item.result}}" style="background: #eeeeee;padding: 10rpx;margin-top:10rpx;">
+            <text style="color:#333333;font-size:24rpx;margin-top:20rpx">结果: {{item.result}}</text>
+          </view>
+        </view>
+      </navigator>
       <view slot="right">
         <view class="flex">
-          <van-button bind:click="edit" square style="--button-default-height:128rpx" type="primary">编辑</van-button>
-          <van-button data-name="#myswipe{{index}}" bind:click="delete" square style="--button-default-height:128rpx" type="danger">删除</van-button>
+          <van-button wx:if="{{item.status == '申请中'}}" bind:click="edit" square data-name="#myswipe{{index}}" data-id='{{item.id}}' style="--button-default-height:128rpx" type="primary">编辑</van-button>
+          <van-button data-name="#myswipe{{index}}" data-id='{{item.id}}'  bind:click="delete" square style="--button-default-height:128rpx" type="danger">删除</van-button>
         </view>
       </view>
     </van-swipe-cell>

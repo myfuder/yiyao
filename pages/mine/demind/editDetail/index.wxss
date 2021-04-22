@@ -1,0 +1,22 @@
+/* pages/mine/demind/editDetail/index.wxss */
+
+.form_item{
+  height:90rpx;
+}
+.form-item-title{
+  width:140rpx;
+  text-align: end;
+}
+.require::after{
+  content: '*';
+  color:#ee0a24;
+  font-size: 28rpx
+}
+.van-radio__icon{
+  width:24rpx !important;
+  height:24rpx !important
+}
+.van-radio__label{
+  font-size:26rpx;
+  margin-left: var(--radio-label-margin,4rpx) !important;
+}

@@ -11,9 +11,12 @@ Page({
   },
 
   getDetailInfo(path){
-    ajax.get(`/api${path}`).then((res)=>{
+    ajax.get(`/api${path}`,{},(res)=>{
       this.setData({
         detail:res
+      })
+      wx.setNavigationBarTitle({
+        title: res.title,
       })
       console.log(res)
     })

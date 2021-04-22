@@ -73,18 +73,15 @@ Page({
     ajax.get(`/api/inter/filter`).then((res)=>{
       let subs = res.data
       this.setData({
-        options:Object.keys(subs).map((key)=>{
+        options:res.data.map((item)=>{
           return {
-            label:key,
-            value:key,
-            childOptions:subs[key]?subs[key].records.map((item)=>{
-              return { text: item.name, value: item.name }
-            }):[]
+            label:item.name,
+            value:item.value,
+            childOptions:item.subvalue.map((itemc)=>{
+              return { text: itemc.name, value: itemc.name }
+            })
           }
         })
-      })
-      this.setData({
-        options:this.data.options
       })
     })
   },

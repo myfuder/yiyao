@@ -45,10 +45,10 @@
               <rich-text nodes="{{item.summary}}" class="text-overflow-two" style="color:#999999;font-size:26rpx;margin-top:10rpx;"></rich-text>
             </view>
             <view class="align-item-center">
-              <view style="margin-right:20rpx">
+              <navigator url='{{item.author.id?"/pages/userDescInfo/index?userId="+item.author.id:""}}' catchtap style="margin-right:20rpx">
                 <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
-                <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
-              </view>
+                <text style="margin-left:8rpx;color:#999999;font-size:24rpx;{{item.author.id?'text-decoration: underline;':''}}">{{item.dutyName}}</text>
+              </navigator>
               <view style="margin-right:20rpx">
                 <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
                 <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>
@@ -77,10 +77,10 @@
                 </view>
                 <view>
                   <view class="align-item-center">
-                    <view style="margin-right:20rpx">
+                    <navigator url='{{item.author.id?"/pages/userDescInfo/index?userId="+item.author.id:""}}' catchtap style="margin-right:20rpx">
                       <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
-                      <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
-                    </view>
+                      <text style="margin-left:8rpx;color:#999999;font-size:24rpx;{{item.author.id?'text-decoration: underline;':''}}">{{item.dutyName}}</text>
+                    </navigator>
                     <view style="margin-right:20rpx">
                       <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
                       <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>

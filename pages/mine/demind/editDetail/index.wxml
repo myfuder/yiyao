@@ -1,0 +1,69 @@
+<!--pages/mine/demind/editDetail/index.wxml-->
+
+<view>
+  <form bindsubmit="formsubmit">
+    <view  style="">
+      <view style="padding:0 30rpx">
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">发布类型</text>
+          <van-radio-group name="type" style="display: flex;" value="{{ params.type }}" direction="horizontal" data-name="type" bind:change="onChangeRadio">
+            <van-radio style="--padding-sm:0;--radio-label-margin:4rpx" checked-color="{{color}}" style="margin-left:40rpx" name="需求信息">需求信息</van-radio>
+            <van-radio style="--padding-sm:0;--radio-label-margin:4rpx" checked-color="{{color}}" style="margin-left:40rpx" name="分享信息">分享信息</van-radio>
+          </van-radio-group>      
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">发布子类型</text>
+          <van-field name="subtype" value="{{ params.subtype }}" readonly bindtap="onDisplay" placeholder="请选择子类型"/>
+          <van-action-sheet
+            show="{{ show }}"
+            actions="{{ actions }}"
+            bind:close="onClose"
+            bind:select="onSelect"
+          />
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">标题</text>
+          <van-field name="title" value="{{ params.title }}"  placeholder="请输入标题" data-name="title" bindinput="onChangeInput" />
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title" style="font-size:26rpx;">有效期至</text>
+          <van-field name="reqEndTime" value="{{ params.reqEndTime }}" readonly bindtap="onDisplay1" placeholder="请选择开始时间"/>
+          <van-popup show="{{ show1 }}" position="bottom" bind:close="onClose1">
+            <van-datetime-picker
+              type="date"
+              value="{{ maxDate }}"
+              min-date="{{ minDate }}"
+              max-date="{{ maxDate }}"
+               bind:cancel="onCancle1"
+               bind:close="onClose1"
+              bind:confirm="onConfirm1"/>
+          </van-popup>
+        </view>
+        <view class="form_item align-item-center">
+          <text class="form-item-title require" style="font-size:26rpx;">主题词</text>
+          <view class="align-item-center" style="width:calc(100% - 140rpx)">
+            <van-tag wx:for="{{params.tags}}" style="margin-left:20rpx" color="{{color}}" data-key="{{item}}" closeable size="medium" type="primary" bind:close="onTagClose">{{item}}</van-tag>
+          <van-field wx:if="{{params.tags.length<4}}" style="width:calc(560rpx - {{140*params.tags.length}}rpx)" placeholder="请输入主题" value="{{tagValue}}" bind:blur="onBlurTags" />
+          </view>
+        </view>
+        <view class="" style="display:flex">
+          <text class="form-item-title" style="font-size:26rpx;margin-top:20rpx;">描述</text>
+          <!-- <van-field name="username" type='textarea'  value="{{ params.title }}"  placeholder="请输入描述" data-name="title" bindinput="onChangeInput" /> -->
+          <van-field
+            type="textarea"
+            value="{{  params.content }}"
+            data-name="content"
+            maxlength="200"
+            placeholder="请输入描述"
+            bind:change="onChangeInput"
+            custom-style="margin-top:20rpx;"
+            style="width:calc(100% - 140rpx);--field-input-text-color:#666666;--field-text-area-min-height:200rpx;--cell-vertical-padding:0rpx;--cell-horizontal-padding:32rpx">
+          </van-field>
+        </view>
+      </view>
+    </view>
+    <view style="padding:30rpx">
+      <van-button round block color="{{color}}" type="info" form-type="submit">提交</van-button>
+    </view>
+  </form >
+</view>

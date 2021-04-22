@@ -16,6 +16,7 @@
 .flex-col-center{
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 .text-overflow-one {
   display: -webkit-box ;

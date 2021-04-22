@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "个人主页",
+  "usingComponents": {
+    "navbar":"/components/navbar/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "mp-html": "mp-html",
+    "van-tag": "@vant/weapp/tag/index"
+  },
+  "navigationStyle":"custom"
+}

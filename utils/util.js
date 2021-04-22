@@ -44,42 +44,69 @@ function debounce(func, wait=500) {
       }, wait);  // 指定 xx ms 后触发真正想进行的操作 handler
   };
 }
-const basUrl = "http://daxia.free.idcfengye.com"
-var ajax_ = (params) => new Promise((resolve, reject) => {
+const basUrl = "http://tester.youbewon.com:8908"
+var ajax_ = (params,callback) => new Promise((resolve, reject) => {
+  wx.showLoading({
+    title: '加载中',
+  })
   wx.request({
     method: params.method,
     url: basUrl+params.url,
     data: params.data || params.params,
     header: {
-      'content-type': 'x-www-form-urlencoded',
-      'Cookie':wx.getStorageSync('cookie'),
-      'X-Requested-With':'X-Requested-With'
+      'content-type': 'application/x-www-form-urlencoded',
+      'token':wx.getStorageSync('token'),
+      'X-Requested-With':'XMLHttpRequest'
     //   'Authorization': wx.getStorageSync('token')
     },
     success(res) {
-      console.log(res)
       var data = res.data;
-      resolve(data);
+      if(callback){
+        callback(res.data)
+      }else{
+        if(data.code == 0){
+          resolve(data);
+        }else if(data.code == -1){
+          wx.reLaunch({
+            url: '/pages/login/index',
+          })
+        }else{
+          wx.showModal({
+            content: '加载出错了',
+            showCancel:false,
+          })
+          reject();
+        }
+      }
+      
     },
     fail(e) {
+      wx.showModal({
+        content: '加载出错了',
+        showCancel:false,
+      })
       reject(e);
-    }
+    },
+    complete(){
+      wx.hideLoading({})
+    },
   });
 });
+
 const ajax = {
-  post(url, options) {
+  post(url, options,callback) {
     var params = {};
     params.method = 'POST';
     params.url = url;
     params.data = options;
-    return ajax_(params);
+    return ajax_(params,callback);
   },
-  get(url, options) {
+  get(url, options,callback) {
     var params = {};
     params.method = 'GET';
     params.url = url;
     params.data = options;
-    return ajax_(params);
+    return ajax_(params,callback);
   }
 };
 module.exports = {

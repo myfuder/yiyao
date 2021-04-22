@@ -19,7 +19,7 @@
       </van-search>
   </view>
   <van-popup show="{{ showPopup }}"  position="right"
-  custom-style="bottom:0;width: 70%;height:calc(100% - {{navHeight}}px);padding:20rpx" bind:close="onClosePopup">
+  custom-style="top:{{navHeight}}px;transform:none;width: 70%;height:calc(100% - {{navHeight}}px);padding:20rpx" bind:close="onClosePopup">
     <view wx:for="{{currOption.screen}}" style="">
       <view class="align-item-center">
         <i class="iconfont {{item.active?'icon-duoxuan':'icon-duoxuan1'}}" data-item="{{item}}" bindtap="onChangeScreen" style="font-size:30rpx;color:{{color}}"></i>
@@ -31,22 +31,22 @@
       </view>
     </view>
   </van-popup>
-  <view class="flex-center" style="height:calc(100vh - 128rpx - 108rpx - {{navHeight*2}}rpx);overflow:auto">
+  <view wx:if="{{isLoadding}}" class="flex-center" style="height:calc(100vh - 128rpx - 108rpx - {{navHeight*2}}rpx);overflow:auto">
     <view class="fx-left">
       <text wx:for="{{typeOptions}}" catchtap="onChangeType" data-item="{{item}}" class="{{typeActive==item.id?'type-active':''}}" style="{{typeActive==item.id?'color:'+color:''}}">{{item.value}}</text>
     </view>
-    <view class="fx-right" style="background: url('../../beauty.png')">
-      <navigator wx:if="{{direction==0}}" url='/pages/details/detail1/index?id={{item.id}}&type={{item.type}}' wx:for="{{fx_data}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
+    <scroll-view wx:if="{{fx_data.length>0}}" class="fx-right" scroll-y="true" bindscrolltolower="scroll" style="background: url('../../beauty.png')">
+      <navigator wx:if="{{direction==0}}"  url='/pages/details/detail1/index?id={{item.id}}&type={{item.type}}' wx:for="{{fx_data}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
           <view class="flex-col-center space-between " style="text-align:left;width:100%;">
             <view>
               <rich-text nodes="{{item.title}}" class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333"></rich-text >
               <rich-text nodes="{{item.summary}}" class="text-overflow-two" style="color:#999999;font-size:26rpx;margin-top:10rpx;height:70rpx;"></rich-text>
             </view>
             <view class="align-item-center" style="margin-top:20rpx;flex-wrap: wrap;">
-                  <view style="margin-right:20rpx">
+                  <navigator url='{{item.author.id?"/pages/userDescInfo/index?userId="+item.author.id:""}}' catchtap style="margin-right:20rpx">
                     <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
-                    <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
-                  </view>
+                    <text style="margin-left:8rpx;color:#999999;font-size:24rpx;{{item.author.id?'text-decoration: underline;':''}}">{{item.dutyName}}</text>
+                  </navigator>
                   <view style="margin-right:20rpx">
                     <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
                     <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>
@@ -71,10 +71,10 @@
                   <rich-text nodes="{{item.summary}}" class="text-overflow-two" style="-webkit-line-clamp: 4;color:#999999;font-size:26rpx;margin-top:10rpx;height:140rpx;"></rich-text>
                 </view>
                 <view class="align-item-center" style="height:120rpx;flex-wrap: wrap;">
-                  <view style="margin-right:20rpx">
+                  <navigator url='{{item.author.id?"/pages/userDescInfo/index?userId="+item.author.id:""}}' catchtap style="margin-right:20rpx">
                     <i class="iconfont icon-wode" style="font-size:30rpx;color:#4CC497"></i>
-                    <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.dutyName}}</text>
-                  </view>
+                    <text style="margin-left:8rpx;color:#999999;font-size:24rpx;{{item.author.id?'text-decoration: underline;':''}}">{{item.dutyName}}</text>
+                  </navigator>
                   <view style="margin-right:20rpx">
                     <i class="iconfont icon-liulan" style="font-size:32rpx;color:#7DADF5"></i>
                     <text style="margin-left:8rpx;color:#999999;font-size:24rpx">{{item.views}}</text>
@@ -92,6 +92,9 @@
             </navigator>
           </van-col>
         </van-row>
+    </scroll-view>
+    <view class="fx-right" wx:else style="text-align: center;font-size: 24rpx;margin-top:80rpx">
+      暂无推荐内容
     </view>
   </view>
   <tabbar tabBar="{{tabBar||[]}}"></tabbar>

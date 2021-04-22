@@ -14,7 +14,7 @@ Page({
     ]
   },
   getList(){
-    ajax.get('/api/kjfw/guides').then((res)=>{
+    ajax.get('/api/kjfw/guides',{},(res)=>{
       console.log(res)
       this.setData({
         kg_data:res
@@ -30,7 +30,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
     this.getList()
   },
 

@@ -31,7 +31,6 @@ Component({
       type:Array,
       value:[],
       observer:function(newVal,oldVal,change){
-        debugger
         this.setData({
           optionsC:newVal,
         })

@@ -1,0 +1,61 @@
+<!--pages/userDescInfo/index.wxml-->
+<navbar navTitle="个人主页" navColor="{{scrollTop>90?color:''}}"></navbar>
+  <image src="../../common/userbg.jpg" style="background:{{color}};z-index:-1;width:100%;position:absolute;top:0;height:calc(430rpx + {{navHeight}}px);width:100%;"></image>
+<view wx:if="{{userInfo.id}}">
+  <view  style="padding:0 40rpx;">
+    <view class="space-between" style="padding-top:{{navHeight}}px;">
+      <van-image round width="120rpx" height="120rpx" src="{{basUrl+userInfo.avatar}}"/>
+      <van-button wx:if="{{userInfo.id != userId}}" icon="star-o" color="{{color}}" round type="info">邀请加入</van-button>
+      <van-button wx:else icon="star-o" color="{{color}}" round type="info" bindtap="toEditInfo">编辑</van-button>
+    </view>
+    <view style="margin-top:20rpx;font-size: 34rpx;font-weight: bold;">
+      {{userInfo.username}}
+      <text style="margin:10rpx 6rpx;border-radius:20rpx;font-size: 20rpx;color: {{color}};">{{userInfo.department}}|{{userInfo.technicalTitle}}</text>
+    </view>
+    <view wx:if="{{userInfo.id != userId}}" class="text-overflow-two" style="color: #666666;font-size: 26rpx;height: 80rpx;line-height: 1.5;margin-top: 20rpx;">
+      {{userInfo.signature}}
+    </view>
+    <van-field wx:else
+            type="textarea"
+            value="{{  userInfo.signature }}"
+            maxlength="200"
+            placeholder="请编辑简介"
+            bind:blur="onBlurTags"
+            custom-style="margin-top:20rpx;"
+            style="width:calc(100% - 140rpx);--field-input-text-color:#666666;--field-text-area-min-height:80rpx;--cell-vertical-padding:0rpx;--cell-horizontal-padding:10rpx">
+          </van-field>
+    <view class="space-between" style="height:90rpx;margin-top:20rpx;">
+      <view class="flex-col-center space-between align-item-center">
+        <text style="font-size:28rpx">科研项目</text>
+        <text style="font-size:32rpx">{{userInfo.hxnumber+userInfo.jhnumber+userInfo.ynnumber}}</text>
+      </view>
+      <view class="flex-col-center space-between align-item-center">
+        <text style="font-size:28rpx">科技论文</text>
+        <text style="font-size:32rpx">{{userInfo.lwnumber}}</text>
+      </view>
+      <view class="flex-col-center space-between align-item-center">
+        <text style="font-size:28rpx">成果专利</text>
+        <text style="font-size:32rpx">{{userInfo.cgnumber+userInfo.zlnumber}}</text>
+      </view>
+      <view class="flex-col-center space-between align-item-center">
+        <text style="font-size:28rpx">积分</text>
+        <text style="font-size:32rpx">{{userInfo.comments}}</text>
+      </view>
+    </view>
+  </view>
+  <van-tabs id="tabs" style="margin-top: 28rpx;--tabs-bottom-bar-color:{{color}}" ellipsis="{{false}}" bind:change="onChange">
+    <van-tab  wx:for="{{tabs}}" title="{{item.title}}"></van-tab>
+  </van-tabs>
+  <view>
+    <navigator wx:for="{{list}}" url='/pages/details/detail1/index?id={{item.id}}&type={{item.type}}'class="flex-center" style="position:relative;background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
+        <van-tag wx:if="{{!activeId}}" style="position:absolute;right:0;top:-8rpx" color="{{color}}" type="primary">{{item.type}}</van-tag>
+        <view class="flex-col-center space-between " style="text-align:left;width:100%;height:180rpx;">
+          <view>
+            <text class="text-overflow-one" style="font-size:30rpx;line-height:1.5;color:#333333">{{item.title}}</text>
+            <text class="text-overflow-two" style="color:#999999;font-size:26rpx;margin-top:20rpx;">{{item.content}}</text>
+          </view>
+          <text style="color:#999999;font-size:24rpx">{{item.favors}}点赞 · {{item.comments}}回复 · {{item.time}}</text>
+        </view>
+      </navigator>
+  </view>
+</view>

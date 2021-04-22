@@ -1,0 +1,11 @@
+<!--pages/login/index.wxml-->
+<view class="flex-col-center align-item-center" style="height:100%">
+  <image src="../../common/faxianbg.jpg" style="position:absolute;top:0;left:0;width:100%;height:100%"></image>
+  <view>
+    <van-field value="{{ params.username }}" custom-style="margin-top:30rpx;border-radius:40rpx" label="账号" placeholder="请输入账号" data-name="username" bindinput="onChangeInput" />
+    <van-field value="{{ params.password }}"  type="password" custom-style="margin-top:30rpx;border-radius:40rpx;" label="密码" placeholder="请输入密码" data-name="password" bindinput="onChangeInput" />
+    <van-button round block color="{{color}}" custom-style="margin-top:30rpx;" type="info" bind:click="submit">提交</van-button>
+    <van-button wx:if="{{openid}}" round block color="#07c160" custom-style="margin-top:30rpx;" type="info" bind:click="submitEasy">一键登录</van-button>
+  </view>
+  
+</view>

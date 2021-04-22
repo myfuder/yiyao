@@ -1,14 +1,90 @@
 <!--pages/mine/tongz/index.wxml-->
 
 <view>
-  <view wx:for="{{list}}" class="align-item-center" style="padding:0 20rpx;">
-    <image style="width:100rpx;height:100rpx;background:#f00;border-radius:50%;"/>
-    <view style="padding:30rpx 0;width: calc(100% - 120rpx);margin-left:20rpx;border-bottom:1px solid #EDEDED">
-      <view class="space-between">
-        <text style="font-size:32rpx;font-weight:bold">{{item.title}}</text>
-        <text style="font-size:24rpx;color:#a5a5a5">{{item.datetime}}</text>
+  <van-tabs active="{{ active }}" color="{{color}}" title-active-color="{{color}}" bind:change="onChange">
+    <van-tab wx:for="{{tabs}}" title-style="font-weight:bold;font-size:30rpx;"  title="{{item.title}}"  name="{{item.name}}"></van-tab>
+  </van-tabs>
+  <view wx:if="{{active == 'xt'}}" style="margin-top:40rpx">
+    <view wx:for="{{list}}" class="align-item-center" style="padding:0 20rpx;">
+      <image src="{{basUrl+item.from.avatar}}" style="width:100rpx;height:100rpx;background:#f00;border-radius:50%;"/>
+      <view wx:if="{{item.event == 1}}" style="padding:30rpx 0;width: calc(100% - 120rpx);margin-left:20rpx;border-bottom:1px solid #EDEDED">
+        <view class="space-between">
+          <view style="font-size:30rpx;">
+            <text>{{item.from.username}}</text><text>收藏了您的文章</text>
+          </view>
+          <text style="font-size:24rpx;color:#a5a5a5">{{item.created}}</text>
+        </view>
+        <view style="font-size:24rpx;margin-top:20rpx;color:#666666">{{item.post.title}}</view>
       </view>
-      <view style="font-size:26rpx;margin-top:20rpx;">{{item.content}}</view>
+      <view wx:elif="{{item.event == 3}}" style="padding:30rpx 0;width: calc(100% - 120rpx);margin-left:20rpx;border-bottom:1px solid #EDEDED">
+        <view class="space-between">
+          <view style="font-size:30rpx;">
+            <text>{{item.from.username}}</text><text>评论了您的文章</text>
+          </view>
+          <text style="font-size:24rpx;color:#a5a5a5">{{item.created}}</text>
+        </view>
+        <view style="font-size:24rpx;margin-top:20rpx;color:#666666">{{item.post.title}}</view>
+      </view>
+      <view wx:elif="{{item.event == 4}}" style="padding:30rpx 0;width: calc(100% - 120rpx);margin-left:20rpx;border-bottom:1px solid #EDEDED">
+        <view class="space-between">
+          <view style="font-size:30rpx;">
+            <text>{{item.from.username}}</text><text style="color:#F78842">回复了您的评论</text>
+          </view>
+          <text style="font-size:24rpx;color:#a5a5a5">{{item.created}}</text>
+        </view>
+        <navigator wx:if="{{item.post}}" url="/pages/details/detail1/index?id={{item.post.id}}&type={{item.type}}" style="background: #eeeeee;padding: 20rpx;margin-top:20rpx;">
+          <rich-text nodes="{{item.post.title}}" class="text-overflow-one" style="color:#999999;font-size:24rpx;;"></rich-text>
+        </navigator>
+        <view wx:else style="font-size:24rpx;margin-top:20rpx;color:#FC6A63;">原文已删除</view>
+      </view>
+      <view wx:elif="{{item.event == 5}}" style="padding:30rpx 0;width: calc(100% - 120rpx);margin-left:20rpx;border-bottom:1px solid #EDEDED">
+        <view class="space-between">
+          <view style="font-size:30rpx;">
+            <text>{{item.from.username}}</text><text style="color:#4CC497">处理了您的申请</text>
+          </view>
+          <text style="font-size:24rpx;color:#a5a5a5">{{item.created}}</text>
+        </view>
+        <navigator url="/pages/mine/mykgfw/index" style="background: #eeeeee;padding: 20rpx;margin-top:20rpx;">
+          <rich-text nodes="{{item.kjfw.title}}" class="text-overflow-one" style="color:#999999;font-size:24rpx;;"></rich-text>
+        </navigator>
+        <view style="font-size:24rpx;margin-top:20rpx;color:#666666">{{item.kjfw.result}}</view>
+      </view>
+      <view wx:elif="{{item.event == 6}}" style="padding:30rpx 0;width: calc(100% - 120rpx);margin-left:20rpx;border-bottom:1px solid #EDEDED">
+        <view class="space-between">
+          <view style="font-size:30rpx;">
+            <text>{{item.from.username}}</text><text style="color:#F78842">邀请您加入华西临床-基础交叉合作平台</text>
+          </view>
+          <text style="font-size:24rpx;color:#a5a5a5">{{item.created}}</text>
+        </view>
+      </view>
+      <view wx:elif="{{item.event == 8}}" style="padding:30rpx 0;width: calc(100% - 120rpx);margin-left:20rpx;border-bottom:1px solid #EDEDED">
+        <view class="space-between">
+          <view style="font-size:30rpx;">
+            <text>{{item.from.username}}</text><text style="color:#F78842">回复了您的建议</text>
+          </view>
+          <text style="font-size:24rpx;color:#a5a5a5">{{item.created}}</text>
+        </view>
+        <view style="background: #eeeeee;padding: 20rpx;margin-top:20rpx;">
+          <rich-text nodes="{{item.yj.content}}" class="text-overflow-one" style="color:#999999;font-size:24rpx;;"></rich-text>
+        </view>
+        <view style="font-size:24rpx;margin-top:20rpx;color:#666666">{{item.yj.reply}}</view>
+      </view>
     </view>
+  </view>
+  <view wx:else>
+    <navigator url="/pages/service/kgfw/detail/index?path={{'/article/'+item.id}}" wx:for="{{kjbList}}" class="align-item-center" style="padding:0 20rpx;">
+      <image src="{{basUrl+item.author.avatar}}" style="width:100rpx;height:100rpx;background:#f00;border-radius:50%;"/>
+      <view style="padding:30rpx 0;width: calc(100% - 120rpx);margin-left:20rpx;border-bottom:1px solid #EDEDED">
+        <view class="space-between">
+          <view style="font-size:30rpx;">
+           <text >{{item.title}}</text>
+          </view>
+        </view>
+        <view style="font-size:24rpx;color:#a5a5a5;margin-top:20rpx">
+          <text style="color:#4CC497">{{item.author.username}}</text>
+          {{item.created}}
+        </view>
+      </view>
+    </navigator>
   </view>
 </view>
