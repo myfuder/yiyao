@@ -57,7 +57,8 @@ Page({
   },
   onHandleTag(e){
     this.setData({
-      tagValue:e.detail
+      tagValue:e.detail,
+      tagItemValue:''
     })
     this.getList(1)
     // this.setData({ showPopup: false });

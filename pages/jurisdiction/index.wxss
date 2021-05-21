@@ -1,0 +1,4 @@
+/* pages/jurisdiction/index.wxss */
+.van-radio , .van-checkbox{
+  margin-top:20rpx
+}

@@ -21,7 +21,7 @@
   /* font-size: 36px !important; */
   margin-top: -40rpx;
   color:#fff;
-  background:#996699;
+  background:#fff;
   padding:20rpx;
   border-radius: 50%;
 }

@@ -36,6 +36,13 @@
 					</view>
 					<i class="iconfont icon-youjiantou" style="font-size:40rpx;color:#C3C3C3"></i>
 				</navigator>
+				<navigator url="/pages/jurisdiction/index" class="user-box clearfix" bindtap="goPage" data-page="applied-actives">
+					<view class="flex-center">
+            <i class="iconfont icon-shijian1" style="font-size:40rpx;color:#4CC497"></i>
+						<text class="menu-label">权限管理</text>
+					</view>
+					<i class="iconfont icon-youjiantou" style="font-size:40rpx;color:#C3C3C3"></i>
+				</navigator>
 				<navigator url="/pages/mine/tongz/index" class="user-box clearfix" bindtap="goPage" data-page="applied-actives">
 					<view class="flex-center">
             <i class="iconfont icon-tongzhi" style="font-size:40rpx;color:#7DADF5"></i>

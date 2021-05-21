@@ -5,8 +5,8 @@
   <view  style="padding:0 40rpx;">
     <view class="space-between" style="padding-top:{{navHeight}}px;">
       <van-image round width="120rpx" height="120rpx" src="{{basUrl+userInfo.avatar}}"/>
-      <van-button wx:if="{{userInfo.id != userId}}" icon="star-o" color="{{color}}" round type="info">邀请加入</van-button>
-      <van-button wx:else icon="star-o" color="{{color}}" round type="info" bindtap="toEditInfo">编辑</van-button>
+      <!-- <van-button wx:if="{{userInfo.id != userId}}" icon="star-o" color="{{color}}" round type="info">邀请加入</van-button> -->
+      <van-button wx:if="{{userInfo.id == userId}}" icon="star-o" color="{{color}}" round type="info" bindtap="toEditInfo">编辑</van-button>
     </view>
     <view style="margin-top:20rpx;font-size: 34rpx;font-weight: bold;">
       {{userInfo.username}}

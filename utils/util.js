@@ -72,7 +72,7 @@ var ajax_ = (params,callback) => new Promise((resolve, reject) => {
           })
         }else{
           wx.showModal({
-            content: '加载出错了',
+            content: data.message||'加载出错了',
             showCancel:false,
           })
           reject();

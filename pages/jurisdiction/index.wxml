@@ -1,0 +1,21 @@
+<!--pages/jurisdiction/index.wxml-->
+
+
+<view style="padding:20rpx 40rpx;">
+  <view style="font-size:26rpx;font-weight:bold;">公开我的业绩: 是否公开/部分公开您的科研业绩到个人主页？ 选择公开/部分公开，系统内成员可在您的个人主页中查看； 选择不公开，则其他成员不能查看（仅能看到基本人事信息）</view>
+  <van-radio-group value="{{ radio }}" bind:change="onChangeRadio">
+    <van-radio name="0" style="line-height:2">不公开科研业绩</van-radio>
+    <van-radio name="1" style="margin-top:20rpx">公开科研业绩</van-radio>
+    <van-radio name="2" style="margin-top:20rpx">部分公开科研业绩</van-radio>
+  </van-radio-group>
+  <view wx:if="{{radio == 2}}" style="padding-left:50rpx;" >
+    <van-checkbox-group value="{{ checkbox }}" bind:change="onChangebox">
+      <van-checkbox name="lw" icon-size="14" style="font-size:24rpx;">公开我的论文（第一/通讯）</van-checkbox>
+      <van-checkbox name="xm" icon-size="14" style="font-size:24rpx;">公开我的项目</van-checkbox>
+      <van-checkbox name="cg" icon-size="14" style="font-size:24rpx;">公开我的成果/专利</van-checkbox>
+    </van-checkbox-group>
+  </view>
+  <button style="background:{{color}};border-radius:40rpx;margin-top:100rpx;color:#fff;font-size:34rpx;" bindtap="submit">
+        确认
+      </button>
+</view>

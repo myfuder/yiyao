@@ -24,7 +24,8 @@
     "pages/mine/mykgfw/editfw/index",
     "pages/mine/demind/editDetail/index",
     "pages/login/index",
-    "pages/authorization/index"
+    "pages/authorization/index",
+    "pages/jurisdiction/index"
   ],
   "usingComponents": {
     "van-row": "@vant/weapp/row",
