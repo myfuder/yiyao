@@ -10,22 +10,21 @@ Page({
     tabBar:[],
     scrollTop:0,
     banners:[
-      {picPath:"http://match.oss.coolgua.com/4cc21d05-5508-40e5-b10d-ec9f30c7467c.png"},
-      {picPath:"http://match.oss.coolgua.com/ef16a6cd-7dab-4f7e-ae26-4136b2fe56b9.png"},
+      {picPath:"https://hxbtb.wchscu.cn/storage/kyjd/BDRhapsody.jpg"},
     ],
     menus: [{
       name: "发现",
-      image: 'https://xgyz.coolgua.com/icon/c2543.png',
+      image: 'https://hxbtb.wchscu.cn/storage/kyjd/c2543.png',
       toPage: '/pages/discovery/index'
     },
     {
       name: "服务",
-      image: 'https://xgyz.coolgua.com/icon/c2538.png',
+      image: 'https://hxbtb.wchscu.cn/storage/kyjd/c2538.png',
       toPage:'/pages/service/index'
     },
     {
       name: "互动",
-      image: 'https://xgyz.coolgua.com/icon/c2537.png',
+      image: 'https://hxbtb.wchscu.cn/storage/kyjd/c2537.png',
       toPage: '/pages/interaction/index'
     }
     ],
@@ -102,6 +101,10 @@ Page({
     
   },
   onLoad() {
+    wx.setStorageSync('color','#6915a1')
+    this.setData({
+      color:wx.getStorageSync('color')
+    })
     if(wx.getStorageSync('token')){
       this.getFxList()
       this.getHdList()
@@ -109,10 +112,6 @@ Page({
       this.setData({
         navHeight: app.globalData.navHeight,
         navTitleTop: app.globalData.navTitleTop
-      })
-      wx.setStorageSync('color','#6915a1')
-      this.setData({
-        color:wx.getStorageSync('color')
       })
     }else{
       wx.reLaunch({

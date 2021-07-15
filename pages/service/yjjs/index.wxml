@@ -34,9 +34,9 @@
     <view class="fx-left">
       <text wx:for="{{typeOptions}}" catchtap="onChangeType" data-item="{{item}}" class="{{typeActive==item.id?'type-active':''}}" style="{{typeActive==item.id?'color:'+color:''}}">{{item.value}}</text>
     </view>
-    <view class="fx-right">
+    <scroll-view class="fx-right" scroll-y="true" bindscrolltolower="scroll" style="height:100%">
       <navigator wx:if="{{direction==0}}" url='/pages/details/detail1/index?id={{item.myid}}&type=科技服务' wx:for="{{yj_data}}" class="flex-center" style="background:#F4F8FB;padding:20rpx 30rpx;{{index>0?'border-top:1px solid #EDEDED':''}}">
-        <van-image width="180rpx" height="150rpx;" fit="scale-down" src="{{basUrl+item.url}}">
+        <van-image width="180rpx" height="150rpx;" fit="scale-down" src="{{item.url}}">
           <!-- <text slot="error">加载失败</text> -->
         </van-image>
         <view class="flex-col-center space-between " style="text-align:left;width:calc(100% - 180rpx);margin-left:20rpx">
@@ -52,7 +52,7 @@
       <van-row wx:if="{{direction==1}}" gutter="10">
         <van-col wx:for="{{yj_data}}" span="12">
           <navigator url='/pages/details/detail1/index?id={{item.myid}}&type=科技服务' class="flex-col-center" style="background:#F4F8FB;margin-bottom:20rpx;padding:10rpx 20rpx;">
-            <van-image width="100%" height="calc(50vw*0.7)" fit="scale-down" src="{{basUrl+item.url}}">
+            <van-image width="100%" height="calc(50vw*0.7)" fit="scale-down" src="{{item.url}}">
               <!-- <text slot="error">加载失败</text> -->
             </van-image>
             <view class="flex-col-center space-between " style="height:300rpx;text-align:left;width:100%;line-height:1.5">
@@ -64,7 +64,7 @@
           </navigator>
         </van-col>
       </van-row>
-    </view>
+    </scroll-view>
   </view>
 </view>
 

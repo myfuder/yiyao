@@ -24,7 +24,8 @@ Page({
       {id:'6',value:'前沿医学中心'}
     ],
     pt_data:[
-    ]
+    ],
+    pageNo:1
   },
   onChangeType(e){
     let item = e.currentTarget.dataset.item
@@ -32,7 +33,7 @@ Page({
       typeActive:item.id,
       currOption:item
     })
-    this.getList()
+    this.getList(1)
   },
   onClickPailie(e){
     this.setData({
@@ -48,8 +49,8 @@ Page({
       })
     })
   },
-  getList(){
-    ajax.get(`/api/kjfw/platform?parkId=${this.data.typeActive}`).then((res)=>{
+  getList(pageNo){
+    ajax.get(`/api/kjfw/platform?pageSize=100&pageNo=${pageNo}&parkId=${this.data.typeActive}`).then((res)=>{
       console.log(res)
       this.setData({
         pt_data:res.data.content.map((item)=>{
@@ -68,7 +69,7 @@ Page({
    */
   onLoad: function (options) {
     this.getOptionList()
-    this.getList()
+    this.getList(1)
   },
 
   /**

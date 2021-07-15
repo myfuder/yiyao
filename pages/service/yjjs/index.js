@@ -17,22 +17,30 @@ Page({
     typeOptions:[],
     currActive:'',
     yj_data:[],
-    key:''
+    key:'',
+    isEnd:false,
+    pageNo:1
   },
   onChange: debounce(function(e){
     _self.setData({
       key: e.detail,
+      pageNo:1,
+      isEnd:false,
+      yj_data:[]
     });
-    _self.getList(1)
+    _self.getList(this.data.pageNo)
   }),
   onChangeType(e){
     let item = e.currentTarget.dataset.item
     this.setData({
       typeActive:item.id,
-      item
+      item,
+      pageNo:1,
+      isEnd:false,
+      yj_data:[]
       // currOption:item
     })
-    this.getList()
+    this.getList(this.data.pageNo)
   },
   onClickPailie(e){
     this.setData({
@@ -48,9 +56,12 @@ Page({
   onChangeScreen(event){
     this.setData({
       currActive: event.detail,
-      showPopup: false
+      showPopup: false,
+      pageNo:1,
+      isEnd:false,
+      yj_data:[]
     });
-    this.getList()
+    this.getList(this.data.pageNo)
   },
   getOptionList(){
     ajax.get('/api/kjfw/filter').then((res)=>{
@@ -65,13 +76,14 @@ Page({
       })
     })
   },
-  getList(){
-    ajax.get(`/api/kjfw/department?depType=${this.data.typeActive}&parkId=${this.data.currActive}`).then((res)=>{
+  getList(pageNo){
+    ajax.get(`/api/kjfw/department?pageSize=10&pageNo=${pageNo}&depType=${this.data.typeActive}&parkId=${this.data.currActive}`).then((res)=>{
       console.log(res)
       this.setData({
-        yj_data:res.data.content.map((item)=>{
-          return {...item,researchDirection:item.researchDirection.replace(/<[^>]*>|/g,"")}
-        })
+        isEnd:this.data.pageNo == res.data.totalPages,
+        yj_data:this.data.yj_data.concat(res.data.content.map((item)=>{
+          return {...item,url:item.url?'http://kyjdxt.cd120.com'+item.url:basUrl+'/dist/images/kyjd/no6.png',researchDirection:item.researchDirection.replace(/<[^>]*>|/g,"")}
+        }))
       })
     })
     // ajax.get(`/api/find/search?pageNo=1&pageSize=100&range=服务&kw=${this.data.key}`).then((res)=>{
@@ -93,9 +105,17 @@ Page({
   onLoad: function (options) {
     _self = this
     this.getOptionList()
-    this.getList()
+    this.getList(this.data.pageNo)
   },
-
+  scroll(e){
+    if(!this.data.isEnd){
+      this.setData({
+        pageNo:this.data.pageNo + 1
+      })
+      this.getList(this.data.pageNo)
+    }
+    console.log(e)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -112,5 +112,5 @@
       </navigator>
     </card>
   </view>
-  <tabbar tabBar="{{tabBar||[]}}"></tabbar>
+  <tabbar tabBar="{{tabBar||[]}}" color="{{color}}"></tabbar>
 </view>

@@ -55,5 +55,5 @@
         退出登录
       </button>
 		</view>
-  <tabbar tabBar="{{tabBar||[]}}"></tabbar>
+  <tabbar tabBar="{{tabBar||[]}}" color="{{color}}"></tabbar>
 </view>

@@ -79,7 +79,7 @@ Page({
       success: res => {
         ajax.get(`/api/wx/code2session?js_code=${res.code}`,{},(resS)=>{
           wx.setStorageSync('openid', resS.data.openid)
-          wx.setStorageSync('session_key', resS.data.session_key)
+          wx.setStorageSync('session_key', resS.data.sessionkey)
         })
         // wx.request({
         //   url: "https://api.weixin.qq.com/sns/jscode2session?appid=" + appid + "&secret=" + secret + "&js_code="+ res.code+ "&grant_type=authorization_code",

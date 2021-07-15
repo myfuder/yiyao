@@ -97,5 +97,5 @@
       暂无推荐内容
     </view>
   </view>
-  <tabbar tabBar="{{tabBar||[]}}"></tabbar>
+  <tabbar tabBar="{{tabBar||[]}}" color="{{color}}"></tabbar>
 </view>

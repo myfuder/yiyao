@@ -44,7 +44,7 @@ function debounce(func, wait=500) {
       }, wait);  // 指定 xx ms 后触发真正想进行的操作 handler
   };
 }
-const basUrl = "http://tester.youbewon.com:8908"
+const basUrl = "https://hxbtb.wchscu.cn"
 var ajax_ = (params,callback) => new Promise((resolve, reject) => {
   wx.showLoading({
     title: '加载中',
